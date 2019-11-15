@@ -36,7 +36,7 @@ CREATE TABLE `utilisateur` (
 )ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 
--- une donnée dans la table ecrit
+--AJout des données dans la table "message"
 
 INSERT INTO `message` (`id`, `titre`, `contenu`, `dateEcrit`, `image`, `idAuteur`, `idAmi`) VALUES
 (1, 'test', 'alors comment ca va', '2017-10-10 16:57:14', '', 1, 1);
@@ -56,3 +56,16 @@ INSERT INTO `message` (`id`, `titre`, `contenu`, `dateEcrit`, `image`, `idAuteur
 (8, '8emeMessage', 'l avant dernier qui est le 8eme', '2017-12-10 16:57:14', '', 1, 1);
 INSERT INTO `message` (`id`, `titre`, `contenu`, `dateEcrit`, `image`, `idAuteur`, `idAmi`) VALUES
 (9, '9emeMessage', 'the final 9eme message', '2017-04-10 16:57:14', '', 1, 1);
+
+
+--AJout des données dans la table "utilisateur"
+
+INSERT INTO `utilisateur`(`id`, `login`, `mdp`, `avatar`) VALUES (1,'test','test','');
+INSERT INTO `utilisateur`(`id`, `login`, `mdp`, `avatar`) VALUES (2,'alex','alex','');
+INSERT INTO `utilisateur`(`id`, `login`, `mdp`, `avatar`) VALUES (3,'will','will','');
+INSERT INTO `utilisateur`(`id`, `login`, `mdp`, `avatar`) VALUES (4,'alexandre','alexandre','');
+INSERT INTO `utilisateur`(`id`, `login`, `mdp`, `avatar`) VALUES (5,'william','william','');
+INSERT INTO `utilisateur`(`id`, `login`, `mdp`, `avatar`) VALUES (6,'jean','jean','');
+INSERT INTO `utilisateur`(`id`, `login`, `mdp`, `avatar`) VALUES (7,'phillipe','phillipe','');
+INSERT INTO `utilisateur`(`id`, `login`, `mdp`, `avatar`) VALUES (8,'francis','francis','');
+INSERT INTO `utilisateur`(`id`, `login`, `mdp`, `avatar`) VALUES (9,'sam','sam','');
