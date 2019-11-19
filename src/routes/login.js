@@ -6,6 +6,12 @@ router.get('/', function(req, res){
    console.log("GET Login page");
    res.render('login/index.ejs', {root: process.cwd()});
 });
+
+router.get('/inscription', function(req, res){
+   console.log("GET Inscription page");
+   res.render('login/inscription.ejs', {root: process.cwd()});
+});
+
 router.post('/', function(req, res){
    var loginObject = new login();
    console.log(loginObject.login("",""));
