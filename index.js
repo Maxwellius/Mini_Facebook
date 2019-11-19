@@ -24,8 +24,11 @@ app.set('views', path.join(__dirname, '/src/views'))
  * Routes Definitions
  */
 
-var login = require('./src/routes/login.js');
-app.use('/login', login);
+var account = require('./src/routes/account.js');
+app.use('/account', account);
+
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.get("/", (req, res) => {
   res.status(200).send("<h1>WHATABYTE: Food For him</h1>");
