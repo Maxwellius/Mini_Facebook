@@ -85,7 +85,6 @@ Utilisateur.getUtilisateurByLogin = function(login,mdp,result){
                     result(err, null);
                 }
                 else{
-                    console.log("result1" + res)
                     result(null, res);
                 }
             });
@@ -99,10 +98,10 @@ Utilisateur.updateAvatarById = function(id, newavatar, result){
              }
            else{   
              result(null, res);
-                }
+            }
             }); 
 };
 
 
 
-module.exports= Utilisateur;
+module.exports = Utilisateur;
