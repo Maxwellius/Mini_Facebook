@@ -18,19 +18,19 @@ const port = process.env.PORT || "8000";
 /**
  *  App Configuration
  */
-
-
-
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '/src/views'))
 /**
  * Routes Definitions
  */
 
 var login = require('./src/routes/login.js');
 app.use('/login', login);
-
+app.use(express.static(path.join(__dirname, 'public')));
 app.get("/", (req, res) => {
-  res.status(200).send("<h1>WHATABYTE: Food For J'ajoute du</h1>");
+  res.status(200).send("<h1>WHATABYTE: Food For him</h1>");
 });
+
 
 /**
  * Server Activation
@@ -38,4 +38,7 @@ app.get("/", (req, res) => {
 
 app.listen(port, () => {
   console.log(`Listening to requests on http://localhost:${port}`);
+  if (process.send) {
+    process.send({ event:'online', url:'http://localhost:8000/' });
+  }
 });
