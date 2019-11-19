@@ -1,10 +1,10 @@
 var express = require('express');
-var login = require('../controllers/login_controller');
+var login = require('../controllers/account_controller');
 var router = express.Router();
 
-router.get('/', function(req, res){
+router.get('/login', function(req, res){
    console.log("GET Login page");
-   res.render('login/index.ejs', {root: process.cwd()});
+   res.render('account/login.ejs', {root: process.cwd()});
 });
 
 router.get('/inscription', function(req, res){
