@@ -2,10 +2,10 @@
 var sql = require('./db.js');
 
 //Constructeur Utilisateur
-var Utilisateur = function(utilisateur){
-    this.login = utilisateur.login;
-    this.mdp = utilisateur.mdp;
-    this.avatar = utilisateur.avatar;
+var Utilisateur = function(){
+    this.login = "";
+    this.mdp = "";
+    this.avatar = "";
 };
 
 Utilisateur.createUtilisateur = function (newUtilisateur, result) {    
@@ -23,7 +23,7 @@ Utilisateur.createUtilisateur = function (newUtilisateur, result) {
 };
 
 Utilisateur.getUtilisateurById = function (utilisateurId, result) {
-        sql.query("Select utilisateur from utilisateur where id = ? ", utilisateurId, function (err, res) {             
+        sql.query("Select * from utilisateur where id = ? ", utilisateurId, function (err, res) {             
                 if(err) {
                     console.log("error: ", err);
                     result(err, null);
@@ -78,15 +78,15 @@ Utilisateur.remove = function(id, result){
 };
 
 
-Utilisateur.getUtilisateurByLogin = function(login,result){
-	sql.query("Select utilisateur FROM utilisateur WHERE login = ?", login, function (err, res) {             
+Utilisateur.getUtilisateurByLogin = function(login,mdp,result){
+	sql.query("Select * FROM utilisateur WHERE login = ? AND mdp = ?", [login,mdp], function (err, res) {             
                 if(err) {
                     console.log("error: ", err);
                     result(err, null);
                 }
                 else{
+                    console.log("result1" + res)
                     result(null, res);
-              
                 }
             });
 }

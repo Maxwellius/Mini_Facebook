@@ -1,4 +1,5 @@
 var express = require('express');
+var login = require('../controllers/login_controller');
 var router = express.Router();
 
 router.get('/', function(req, res){
@@ -6,7 +7,8 @@ router.get('/', function(req, res){
    res.render('login/index.ejs', {root: process.cwd()});
 });
 router.post('/', function(req, res){
-   res.send('POST route on login.');
+   var loginObject = new login();
+   console.log(loginObject.login("",""));
 });
 
 //export this router to use in our index.js
