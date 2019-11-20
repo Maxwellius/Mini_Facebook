@@ -12,6 +12,11 @@ router.get('/inscription', function(req, res){
    res.render('login/inscription.ejs', {root: process.cwd()});
 });
 
+router.get('/modif_compte', function(req, res){
+   console.log("GET Modification page");
+   res.render('login/modif_compte.ejs', {root: process.cwd()});
+});
+
 
 router.post('/', function(req, res){
    var loginObject = new login();
