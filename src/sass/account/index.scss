@@ -1,0 +1,129 @@
+@import '../values.scss';
+
+body{
+  height: 100vh;
+  width: 100vw;
+  background-color: $royal-blue;
+  width: 100%;
+  color: white;
+}
+
+header{
+  display: flex;
+  flex-direction: row;
+  padding-top: 20px;
+  a{
+    color: white;
+    text-decoration: none;
+    font-size: $font-size-big;
+    padding: 0 30px;
+  }
+
+  a:hover{
+    text-decoration: underline;
+  }
+
+  .icon-link {
+    font-weight: bold;
+    font-family:$font-superior;
+  }
+
+  .icon-link:hover {
+    text-decoration: none;
+  }
+}
+
+.main-container{
+  margin: 140px auto;
+  width: 82%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  
+  .form-container{
+    display: flex;
+    flex-direction: column;
+    background-color: $cerulean-blue;
+    border-radius: 8px;
+    width: 46%;
+
+    h1{
+      font-size: $font-size-large;
+      font-family: $font-superior;
+      align-self: center;
+      margin-bottom: 43px;
+      margin-top: 30px;
+    }
+
+    form{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      label{
+        width: 85%;
+        font-size: big;
+      }
+      label:last-of-type{
+        margin-top: 15px;
+      }
+      input[type=text]{
+        width: 85%;
+        margin: auto;
+        margin-top: 15px;
+        background: #FFFFFF;
+        border-radius: 8px;
+        border: none;
+        height: 50px;
+      }
+      #mdp-textbox{
+        margin-bottom: 90px;
+      }
+      input[type=submit]{
+        background: #DB5461;
+        border-radius: 8px;
+        border: none;
+        width: 221px;
+        height: 50px;
+        font-size: $font-size-big;
+        color: white;
+        margin-bottom: 15px;
+      }
+      p{
+        color: white;
+        margin-bottom: 30px;
+        a{
+          text-decoration: underline;
+          color: white;
+        }
+      }
+    }
+  }
+
+  .desc-container{
+    display: flex;
+    width: 46%;
+    flex-direction: column;
+
+    h1{
+      font-size: $font-size-jumbo;
+      font-family: $font-superior;
+      margin-bottom: 35px;
+    }
+    h2{
+      font-size: $font-size-large;
+      font-family: $font-superior;
+
+      em{
+        font-style: normal;
+        color: $dark-terra-cotta;
+      }
+    }
+    h3{
+      font-size: $font-size-big;
+    }
+    p{
+      margin-top: 56px;
+    }
+  }
+}
