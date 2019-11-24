@@ -6,6 +6,8 @@
 
 const express = require("express");
 const path = require("path");
+const session = require("express-session");
+const bodyParser = require('body-parser');
 
 
 /**
@@ -18,21 +20,27 @@ const port = process.env.PORT || "8000";
 /**
  *  App Configuration
  */
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, '/src/views'))
+app.set('view engine', 'ejs'); // ejs setup
+app.set('views', path.join(__dirname, '/src/views')) // session setup
+app.use(session({secret: 'sssshhhhh'}))
+
+
+
+app.use(express.static(path.join(__dirname, 'public')));//static public folder
+
+
+
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 /**
  * Routes Definitions
  */
 
 var account = require('./src/routes/account.js');
-app.use('/account', account);
+app.use('/account', account); // Route /account
 
-
-
-app.use(express.static(path.join(__dirname, 'public')));
-app.get("/", (req, res) => {
-  res.status(200).send("<h1>WHATABYTE: Food For him</h1>");
-});
+var dashboard = require('./src/routes/dashboard.js');
+app.use('/', dashboard); //Route / redirects to the /dashboard
 
 
 /**

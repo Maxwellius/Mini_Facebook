@@ -51,6 +51,18 @@ header{
     border-radius: 8px;
     width: 46%;
 
+    .invalid-connection{
+      color: white;
+      background-color: darken($dark-terra-cotta, 10);
+      width: 85%;
+      padding-left: 10px;
+      border-radius: 8px;
+      text-align: center;
+      height: 30px;
+      line-height: 30px;
+      align-self: center;
+      margin-bottom: 10px;
+    }
     h1{
       font-size: $font-size-large;
       font-family: $font-superior;
@@ -177,11 +189,7 @@ header{
   }
 
 }
-@media screen and (max-width: 420px){
-  .main-container{
-    width: 100%;
-  }
-}
+
 @media screen and (max-width: 820px){
   header{
     display: none;
@@ -224,4 +232,10 @@ header{
     }
   }
 
+}
+
+@media screen and (max-width: 420px){
+  .main-container{
+    width: 100%;
+  }
 }
