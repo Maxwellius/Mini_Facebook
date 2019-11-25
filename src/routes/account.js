@@ -9,7 +9,7 @@ router.get('/login', function(req, res){
 
 router.get('/inscription', function(req, res){
    console.log("GET Inscription page");
-   res.render('login/inscription.ejs', {root: process.cwd()});
+   res.render('account/inscription.ejs', {root: process.cwd()});
 });
 
 router.get('/modif_compte', function(req, res){
@@ -20,9 +20,7 @@ router.get('/modif_compte', function(req, res){
 
 router.post('/login', function(req, res){
    var account_controller = new AccountController(req, res);
-   console.log(req.body.login+ ' '+req.body.mdp)
    account_controller.login(req.body.login, req.body.mdp);
-   
 });
 
 //export this router to use in our index.js

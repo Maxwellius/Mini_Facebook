@@ -55,7 +55,6 @@ header{
       color: white;
       background-color: darken($dark-terra-cotta, 10);
       width: 85%;
-      padding-left: 10px;
       border-radius: 8px;
       text-align: center;
       height: 30px;
@@ -87,11 +86,14 @@ header{
         margin: auto;
         margin-top: 15px;
         background: #FFFFFF;
-        padding-left : 10px;
+        padding-left: 10px;
+        -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+        -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+        box-sizing: border-box;         /* Opera/IE 8+ */
         border-radius: 8px;
         border: none;
         font-size: $font-size-normal;
-        height: 50px;
+        height: 40px;
       }
       #mdp-textbox{
         margin-bottom: 90px;
