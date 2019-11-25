@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le :  mer. 13 nov. 2019 à 13:53
--- Version du serveur :  5.7.26
--- Version de PHP :  7.2.18
+-- Host: localhost
+-- Generation Time: Nov 24, 2019 at 05:39 PM
+-- Server version: 8.0.17
+-- PHP Version: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,45 +19,40 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `mini_facebook`
+-- Database: `mini_facebook`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `lien_amis`
+-- Table structure for table `lien_amis`
 --
 
-DROP TABLE IF EXISTS `lien_amis`;
-CREATE TABLE IF NOT EXISTS `lien_amis` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `lien_amis` (
+  `id` int(11) NOT NULL,
   `idUtilisateur1` int(11) NOT NULL,
   `idUtilisateur2` int(11) NOT NULL,
-  `etat` varchar(10) NOT NULL,
-  PRIMARY KEY (`id`)
+  `etat` varchar(10) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `message`
+-- Table structure for table `message`
 --
 
-DROP TABLE IF EXISTS `message`;
-CREATE TABLE IF NOT EXISTS `message` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `message` (
+  `id` int(11) NOT NULL,
   `titre` varchar(255) NOT NULL,
   `contenu` text,
   `dateEcrit` datetime NOT NULL,
   `image` varchar(255) DEFAULT NULL,
   `idAuteur` int(11) NOT NULL,
-  `idAmi` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+  `idAmi` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `message`
+-- Dumping data for table `message`
 --
 
 INSERT INTO `message` (`id`, `titre`, `contenu`, `dateEcrit`, `image`, `idAuteur`, `idAmi`) VALUES
@@ -74,32 +69,77 @@ INSERT INTO `message` (`id`, `titre`, `contenu`, `dateEcrit`, `image`, `idAuteur
 -- --------------------------------------------------------
 
 --
--- Structure de la table `utilisateur`
+-- Table structure for table `utilisateur`
 --
 
-DROP TABLE IF EXISTS `utilisateur`;
-CREATE TABLE IF NOT EXISTS `utilisateur` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `utilisateur` (
+  `id` int(11) NOT NULL,
   `login` varchar(15) NOT NULL,
   `mdp` varchar(15) NOT NULL,
   `avatar` varchar(1500) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+  `nom` varchar(15) NOT NULL,
+  `prenom` varchar(15) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `utilisateur`
+-- Dumping data for table `utilisateur`
 --
 
-INSERT INTO `utilisateur` (`id`, `login`, `mdp`, `avatar`) VALUES
-(1, 'test', 'test', ''),
-(2, 'alex', 'alex', ''),
-(3, 'will', 'will', ''),
-(4, 'alexandre', 'alexandre', ''),
-(5, 'william', 'william', ''),
-(6, 'jean', 'jean', ''),
-(7, 'phillipe', 'phillipe', ''),
-(8, 'francis', 'francis', ''),
-(9, 'sam', 'sam', '');
+INSERT INTO `utilisateur` (`id`, `login`, `mdp`, `avatar`, `nom`, `prenom`) VALUES
+(1, 'test', 'test', '', 'Test', 'Test'),
+(2, 'alex', 'alex', '', 'Alexandre', 'Alexandre'),
+(3, 'will', 'will', '', 'OLAX', 'William'),
+(4, 'alexandre', 'alexandre', '', 'Alex', 'Dupont'),
+(5, 'william', 'william', '', 'William', 'Shakespeare'),
+(6, 'jean', 'jean', '', 'Jean', 'Hubert'),
+(7, 'phillipe', 'phillipe', '', 'Philippe', 'Chauvel'),
+(8, 'francis', 'francis', '', 'Francis', 'Cariotte'),
+(9, 'sam', 'sam', '', 'Samuel', 'Desalos');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `lien_amis`
+--
+ALTER TABLE `lien_amis`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `message`
+--
+ALTER TABLE `message`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Indexes for table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `lien_amis`
+--
+ALTER TABLE `lien_amis`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `message`
+--
+ALTER TABLE `message`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,15 +1,15 @@
 var express = require('express');
-var login = require('../controllers/account_controller');
+var AccountController = require('../controllers/account_controller');
 var router = express.Router();
 
 router.get('/login', function(req, res){
    console.log("GET Login page");
-   res.render('account/login.ejs', {root: process.cwd()});
+   res.render('account/login.ejs', {root: process.cwd(), query: req.query});
 });
 
 router.get('/inscription', function(req, res){
    console.log("GET Inscription page");
-   res.render('login/inscription.ejs', {root: process.cwd()});
+   res.render('account/inscription.ejs', {root: process.cwd()});
 });
 
 router.get('/modif_compte', function(req, res){
@@ -18,9 +18,9 @@ router.get('/modif_compte', function(req, res){
 });
 
 
-router.post('/', function(req, res){
-   var loginObject = new login();
-   console.log(loginObject.login("test","test"));
+router.post('/login', function(req, res){
+   var account_controller = new AccountController(req, res);
+   account_controller.login(req.body.login, req.body.mdp);
 });
 
 //export this router to use in our index.js

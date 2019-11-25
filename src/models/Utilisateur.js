@@ -81,11 +81,11 @@ Utilisateur.remove = function(id, result){
 Utilisateur.getUtilisateurByLogin = function(login,mdp,result){
 	sql.query("Select * FROM utilisateur WHERE login = ? AND mdp = ?", [login,mdp], function (err, res) {             
                 if(err) {
-                    console.log("error: ", err);
-                    result(err, null);
+                    throw err;
                 }
                 else{
-                    result(null, res);
+                    console.log(res.length)
+                    result(res);
                 }
             });
 }

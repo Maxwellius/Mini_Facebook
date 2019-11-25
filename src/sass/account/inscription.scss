@@ -1,0 +1,48 @@
+@import '../values.scss';
+
+.main-container{
+  .form-container{
+    form{
+      .name-surname-container{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 1fr, 2fr;
+        width: 85%;
+        margin-bottom: 15px;
+      
+        .label-nom{
+          grid-row: 1;
+          grid-column: 1;
+          align-self: center;
+          margin: 0;
+        }
+      
+        .label-prenom{
+          grid-row: 1;
+          grid-column: 2;
+          align-self: center;
+          margin: 0;
+          width: 92%;
+          justify-self: end;
+        }
+
+        #nom-textbox{
+          grid-row: 2;
+          grid-column: 1;
+          margin: 15px 0 0 0;
+          width: 92%;
+        }
+      
+        #prenom-textbox{
+          grid-row: 2;
+          grid-column: 2;
+          width: 92%;
+          justify-self: end;
+          margin: 15px 0 0 0;
+
+        }
+      }
+    }
+  }
+}
+
