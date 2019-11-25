@@ -1,0 +1,108 @@
+@import '../values.scss';
+
+body {
+  height: 100vh;
+  width: 100vw;
+  background-color: $royal-blue;
+  width: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  padding-top: 20px;
+
+  a {
+    color: white;
+    text-decoration: none;
+    font-size: $font-size-normal;
+    padding: 0 30px;
+  }
+}
+
+input[type=text],
+input[type=password],
+input[type=date] {
+  margin: auto;
+  margin-top: 15px;
+  background: #FFFFFF;
+  padding-left: 10px;
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
+  border-radius: 8px;
+  border: none;
+  font-size: $font-size-normal;
+  height: 40px;
+}
+
+input[type=submit] {
+  background: $dark-terra-cotta;
+  border-radius: 8px;
+  border: none;
+  width: 221px;
+  height: 50px;
+  font-size: $font-size-big;
+  color: white;
+  margin-bottom: 15px;
+  align-self: center;
+}
+
+input[type=submit]:hover {
+  background: $english-red;
+  cursor: pointer;
+}
+
+p {
+  color: white;
+  margin-bottom: 30px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.icon-link {
+  font-weight: bold;
+  font-family: $font-superior;
+}
+
+.icon-link:hover {
+  text-decoration: none;
+}
+
+.main-container {
+  width: 90%;
+}
+
+.form-container {
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: $cerulean-blue;
+  border-radius: 8px;
+  width: 46%;
+  padding: 2%;
+
+}
+
+.title {
+  margin-bottom: 30px;
+}
+
+h1 {
+  font-size: $font-size-large;
+  font-family: $font-superior;
+  align-self: center;
+  margin-bottom: 43px;
+  margin-top: 30px;
+  text-align: center;
+}

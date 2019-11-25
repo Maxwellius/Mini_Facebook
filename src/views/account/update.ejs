@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+    <link rel="stylesheet" href="/stylesheets/account/update.css">
+</head>
+
+<body class="main-container">
+    <header>
+        <a href="/home" class="icon-link">Mini Facebook</a>
+        <a href="/account/login">Se connecter</a>
+        <a href="/account/inscription">S'inscrire</a>
+    </header>
+    <form class="form-container" action="/account/update" method="post">
+        <h1 class="title">Bienvenue sur votre Profil</h1>
+        <p class="label-prenom">Prénom : </p>
+        <p class="label-nom">Nom : </p>
+        <p>Pseudo : <input type="text" name="pseudo"></p>
+        <p>Mot de passe : <input type="password" name="mdp"></p>
+        <p>Date de naissance : <input type="date" name="birth"></p>
+        <p>Avatar : <input type="file" name="avatar" accept="image/png, image/jpg, image/jpeg"></p>
+        <input type="submit" name="Validation" value="Valider">
+    </form>
+</body>
+
+</html>
