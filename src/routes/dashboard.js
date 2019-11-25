@@ -3,7 +3,7 @@ var router = express.Router();
 
 router.get('/', function(req, res){
   console.log(req.session.user_id);
-  if(req.session.user_id === -1 || req.session.user_id === undefined){
+  if(req.session.user === undefined || req.session.user.id === -1){
     res.redirect('/account/login')
   } else {
     res.render('dashboard/index.ejs')
