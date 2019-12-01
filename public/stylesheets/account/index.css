@@ -1,7 +1,7 @@
 body {
   height: 100vh;
   width: 100vw;
-  background-color: #03256C;
+  background-color: #003479;
   width: 100%;
   color: white;
   display: flex;
@@ -35,12 +35,12 @@ header {
   .main-container .form-container {
     display: flex;
     flex-direction: column;
-    background-color: #3066BE;
+    background-color: #4392F1;
     border-radius: 8px;
     width: 46%; }
     .main-container .form-container .invalid-connection {
       color: white;
-      background-color: #d02c3c;
+      background-color: #640057;
       width: 85%;
       border-radius: 8px;
       text-align: center;
@@ -82,7 +82,7 @@ header {
       .main-container .form-container form #mdp-textbox {
         margin-bottom: 90px; }
       .main-container .form-container form input[type=submit] {
-        background: #DB5461;
+        background: #970083;
         border-radius: 8px;
         border: none;
         width: 221px;
@@ -91,7 +91,7 @@ header {
         color: white;
         margin-bottom: 15px; }
       .main-container .form-container form input[type=submit]:hover {
-        background: #af424d;
+        background: #7C006C;
         cursor: pointer; }
       .main-container .form-container form p {
         color: white;
@@ -110,9 +110,6 @@ header {
     .main-container .desc-container h2 {
       font-size: 36px;
       font-family: "IBM Plex Mono", monospace; }
-      .main-container .desc-container h2 em {
-        font-style: normal;
-        color: #DB5461; }
     .main-container .desc-container h3 {
       font-size: 24px; }
     .main-container .desc-container p {
