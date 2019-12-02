@@ -1,7 +1,19 @@
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Mini Facebook</title>
-<link rel="stylesheet" href="/stylesheets/default.css">
-<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:700|IBM+Plex+Sans&display=swap" rel="stylesheet"> 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mini Facebook</title>
+  <link rel="stylesheet" href="/stylesheets/default.css">
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:700|IBM+Plex+Sans&display=swap" rel="stylesheet"> 
 
+  <% if(idpage === 'login'){ %>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/account/index.css">
+  <% } else if (idpage === 'inscription') { %>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/account/index.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/account/inscription.css">
+  <% } else if (idpage === 'dashboard') { %>
+    <link rel="stylesheet" href="/stylesheets/partials/header.css">
+  <% } %>
+</head>
