@@ -84,6 +84,7 @@ header .separator {
   -webkit-transform: rotate(0deg); }
 
 .triangle-icon.opened {
+  transform: rotate(180deg);
   -webkit-transform: rotate(180deg); }
 
 .account-information__dropdown-menu {
@@ -93,7 +94,7 @@ header .separator {
   z-index: 2;
   flex-direction: column;
   align-items: flex-start;
-  background-color: #ECE8EF;
+  background-color: #4392F1;
   padding-right: 40px;
   padding-top: 10px;
   padding-bottom: 20px;
@@ -128,7 +129,7 @@ header .separator {
   .form-header {
     display: none; } }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 730px) {
   .account-information {
     display: none; }
   header .separator {

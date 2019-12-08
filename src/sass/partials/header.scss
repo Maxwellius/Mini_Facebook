@@ -101,6 +101,7 @@ header .separator {
 }
 
 .triangle-icon.opened{
+  transform: rotate(180deg);
   -webkit-transform: rotate(180deg);
 }
 
@@ -113,7 +114,7 @@ header .separator {
 
   flex-direction: column;
   align-items: flex-start;
-  background-color: $glitter;
+  background-color: $blueberry;
   padding-right: 40px;
   padding-top: 10px;
   padding-bottom: 20px;
@@ -156,7 +157,7 @@ header .separator {
   }
 }
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: 730px){
   .account-information{
     display: none;
   }
