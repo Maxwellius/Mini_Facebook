@@ -1,1 +1,21 @@
-Hello World (C'est la page avec le futur dashboard)
+<% include ../partials/head.ejs %>
+<body>
+    <% include ../partials/header.ejs %>
+    <div class="main-container close-right-panel">
+        <div class="left-panel"></div>
+        <div class="main-panel"></div>
+        <div class="right-panel"></div>
+    </div>
+    <script>
+        function displayRightPanel(){
+            const mainContainer = document.getElementsByClassName("main-container")[0]
+            mainContainer.classList.toggle("display-right-panel")
+            mainContainer.classList.remove("close-right-panel")
+        }
+        document.getElementsByClassName("sandwich-menu-btn")[0].addEventListener("click",displayRightPanel);
+        //TODO ajouter l'affichage du panel de manière smooth.
+        document.getElementsByClassName(".display-right-panel")
+    </script>
+</body>
+</html>
+

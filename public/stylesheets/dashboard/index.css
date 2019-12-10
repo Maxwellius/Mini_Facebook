@@ -1,0 +1,63 @@
+body {
+  display: flex;
+  height: 100vh;
+  flex-direction: column; }
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  flex: 1; }
+
+.left-panel {
+  width: 250px;
+  background-color: white; }
+
+.right-panel {
+  width: 250px;
+  background-color: white; }
+
+.main-panel {
+  flex: 1;
+  background: #ECE8EF; }
+
+@media screen and (max-width: 1290px) {
+  .left-panel, .right-panel {
+    width: 175px; } }
+
+@media screen and (max-width: 1030px) {
+  .left-panel {
+    display: none; }
+  .right-panel {
+    width: 250px; } }
+
+@media screen and (max-width: 730px) {
+  .left-panel {
+    display: none; }
+  .main-panel {
+    width: 100vw;
+    flex: none; }
+  .main-container {
+    width: 150vw;
+    animation-duration: 1s;
+    animation-name: slider_back;
+    animation-fill-mode: forwards; }
+  .main-container.close-right-panel {
+    animation: none;
+    -webkit-animation: none; }
+  .right-panel {
+    width: 50vw; }
+  .main-container.display-right-panel {
+    animation-duration: 1s;
+    animation-name: slider;
+    animation-fill-mode: forwards; }
+  @keyframes slider {
+    from {
+      transform: translateX(0vw); }
+    to {
+      transform: translateX(-50vw); } }
+  @keyframes slider_back {
+    to {
+      transform: translateX(0vw); }
+    from {
+      transform: translateX(-50vw); } } }

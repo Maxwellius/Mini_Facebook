@@ -6,7 +6,7 @@ router.get('/', function(req, res){
   if(req.session.user === undefined || req.session.user.id === -1){
     res.redirect('/account/login')
   } else {
-    res.render('dashboard/index.ejs')
+    res.render('dashboard/index.ejs', {idpage: 'dashboard'})
   }
 })
 

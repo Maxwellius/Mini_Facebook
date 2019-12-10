@@ -6,10 +6,7 @@ router.get('/login', function (req, res) {
    console.log("GET Login page");
    if (req.session.user_id === -1 || req.session.user_id === undefined) {
       //L'utilisateur n'est pas encore connecté
-      res.render('account/login.ejs', {
-         root: process.cwd(),
-         query: req.query
-      });
+      res.render('account/login.ejs', { root: process.cwd(), query: req.query, idpage: 'login'});
    } else {
       //L'utilisateur est connecté
       res.redirect('/')
@@ -25,9 +22,7 @@ router.get('/inscription', function (req, res) {
    console.log("GET Inscription page");
    if (req.session.user_id === -1 || req.session.user_id === undefined) {
       //L'utilisateur n'est pas encore connecté
-      res.render('account/inscription.ejs', {
-         root: process.cwd()
-      });
+      res.render('account/inscription.ejs', { root: process.cwd(), idpage: 'inscription'});
    } else {
       //L'utilisateur est connecté
       res.redirect('/')
@@ -44,9 +39,7 @@ router.post('/inscription', function (req, res) {
 
 router.get('/update', function (req, res) {
    console.log("GET Modification page");
-   res.render('account/update.ejs', {
-      root: process.cwd()
-   });
+   res.render('login/modif_compte.ejs', { root: process.cwd(), idpage: 'modif_compte'});
 });
 
 router.post('/update', function (req, res) {
