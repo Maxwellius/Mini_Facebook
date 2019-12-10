@@ -3,6 +3,7 @@ body {
   height: 100vh;
   flex-direction: column; }
 
+/** Panels **/
 .main-container {
   display: flex;
   flex-direction: row;
@@ -11,7 +12,9 @@ body {
 
 .left-panel {
   width: 250px;
-  background-color: white; }
+  background-color: white;
+  box-sizing: border-box;
+  padding-left: 20px; }
 
 .right-panel {
   width: 250px;
@@ -61,3 +64,93 @@ body {
       transform: translateX(0vw); }
     from {
       transform: translateX(-50vw); } } }
+
+/** Main Panel **/
+.wall-header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 97%;
+  height: 220px;
+  border: solid 1px black;
+  margin: 20px auto 30px auto;
+  border-radius: 6px; }
+
+.wall-picture {
+  width: 100%;
+  height: 160px;
+  background-color: #003479;
+  border-radius: 6px 6px 0 0; }
+
+.profile-picture.big-picture {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  left: 20px;
+  top: 70px;
+  background-color: white; }
+
+.wall-header__navigation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  flex: 1;
+  background-color: white;
+  border-radius: 0 0 6px 6px;
+  box-sizing: border-box;
+  padding-left: 180px; }
+
+.tab_link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 100%;
+  text-decoration: none;
+  color: black; }
+
+.is_active {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  border-bottom: inset 5px #970083; }
+
+/** Left Panel **/
+.subtitle {
+  font-size: 18px;
+  font-weight: bolder;
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+.profile-unit {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 8px; }
+
+.profile-picture {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  margin-right: 20px;
+  background-color: white; }
+
+.profile-name {
+  font-weight: lighter; }
+
+.my-wall-unit {
+  color: white;
+  background-color: #003479;
+  margin-top: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px; }
+
+/** Right Panel **/
+.right-panel .profile-unit {
+  padding-left: 20px; }
+
+.right-panel .subtitle {
+  margin-left: 20px; }
