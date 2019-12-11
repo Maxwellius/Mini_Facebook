@@ -113,6 +113,7 @@ body{
   height: 160px;
   background-color: $catalina-blue;
   border-radius: 6px 6px 0 0;
+  position: relative;
 }
 .profile-picture.big-picture{
   position: absolute;
@@ -147,12 +148,32 @@ body{
   height: 100%;
   text-decoration: none;
   color: black;
+  position: relative;
 }
 
-.is_active{
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  border-bottom: inset 5px $mardi-gras;
+.is_active:after{
+  display: block;
+  height: 5px;
+  width: 100%;
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left:0;
+  background-color: $mardi-gras;
+}
+
+.usertags{
+  color: white;
+  left: 200px;
+  bottom: 13px;
+  margin-top: auto;
+  position: absolute
+}
+
+.username_text{
+  font-size: $font-size-big;
+  font-family: $font-superior;
+  font-weight: 500;
 }
 /** Left Panel **/
 
