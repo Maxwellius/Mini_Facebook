@@ -28,15 +28,15 @@ LienAmisController = function (req, res) {
         //     Vérification que le login n'existe pas déjà
         Utilisateur.checkIfExists(login, function (result) {
             if (result.exists) {
-                errorString = "Erreur : Le login existe déjà."
+                errorString = "Erreur : Le Lien existe déjà."
             } else {
-                // Tous les parametres ont été vérifiés, on crée le compte
-                user.login = login
-                user.mdp = mdp
-                user.nom = nom
-                user.prenom = prenom
-                success = user.save()
-                req.session.user = user //Enregistrement dans la session
+                // Tous les parametres ont été vérifiés, on crée le lien
+                liensamis.login = login
+                liensamis.mdp = mdp
+                liensamis.nom = nom
+                liensamis.prenom = prenom
+                success = liensamis.save()
+                // req.session.liensamis = liensamis //Enregistrement dans la session
 
                 if (success) {
                     console.log("Succes : " + errorString)

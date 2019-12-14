@@ -110,3 +110,4 @@ Message.remove = function (id, result) {
     }
   })
 }
+module.exports = Message;
