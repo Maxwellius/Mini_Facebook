@@ -158,6 +158,22 @@ body {
 .right-panel .subtitle {
   margin-left: 20px; }
 
+.new-publication {
+  width: 90%;
+  height: 40px;
+  border-radius: 6px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  color: white;
+  background-color: #970083;
+  line-height: 40px; }
+
+.new-publication:hover {
+  background-color: #7C006C; }
+
 /** Left Panel **/
 .subtitle {
   font-size: 18px;
