@@ -34,13 +34,13 @@
                 </div>
                 <img src="" alt="" class="profile-picture big-picture">
                 <nav class="wall-header__navigation">
-                    <a href="" class="tab_link">Publications</a>
-                    <a href="" class="tab_link is_active">Amis</a>
-                    <a href="" class="tab_link">A propos</a>
+                    <a href="" class="tab_link" data-value='0'>Publications</a>
+                    <a href="" class="tab_link is_active" data-value='1'>Amis</a>
+                    <a href="" class="tab_link" data-value='2'>A propos</a>
                 </nav>
             </div>
-            <div class="partial-container">
-                
+            <div id="main-partial-container">
+
             </div>
         </div>
         <div class="right-panel">
@@ -69,16 +69,7 @@
             </div>
         </div>
     </div>
-    <script>
-        function displayRightPanel(){
-            const mainContainer = document.getElementsByClassName("main-container")[0]
-            mainContainer.classList.toggle("display-right-panel")
-            mainContainer.classList.remove("close-right-panel")
-        }
-        document.getElementsByClassName("sandwich-menu-btn")[0].addEventListener("click",displayRightPanel);
-        //TODO ajouter l'affichage du panel de manière smooth.
-        document.getElementsByClassName(".display-right-panel")
-    </script>
+    <script type="text/javascript" src="/javascripts/dashboard_index.js"></script>
 </body>
 </html>
 
