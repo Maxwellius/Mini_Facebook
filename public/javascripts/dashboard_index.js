@@ -9,16 +9,18 @@ document.getElementsByClassName(".display-right-panel")
 
 $(".tab_link").click(function(event){
   event.preventDefault();
-  ajaxGetPartial(event.currentTarget.attr(data-value));
+  $(".tab_link").removeClass("is_active")
+  $(event.target).addClass("is_active")
+  ajaxGetPartial($(event.target).data('value'));
 })
 
 function ajaxGetPartial(partial_index){
   $.ajax({
-    method: "POST",
-    url: "/dashboard/getpartial",
-    data: JSON.stringify({"partial_index": partial_index}),
+    url: '/getpartial',
+    type: 'POST',
+    data: JSON.stringify({'partial_index': partial_index}),
     contentType: "application/json;charset=utf-8",
-    dataType: html,
+    dataType: 'html',
     success: function(partial_html){
       $('#main-partial-container').html(partial_html)
     },
