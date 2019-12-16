@@ -156,13 +156,14 @@ body {
   padding-left: 20px; }
 
 .right-panel .subtitle {
-  margin-left: 20px; }
+  margin-left: 20px;
+  margin-top: 0; }
 
-.new-publication {
+#new-publication {
   width: 90%;
   height: 40px;
   border-radius: 6px;
-  margin: 20px auto;
+  margin: 30px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -171,7 +172,7 @@ body {
   background-color: #970083;
   line-height: 40px; }
 
-.new-publication:hover {
+#new-publication:hover {
   background-color: #7C006C; }
 
 /** Left Panel **/
@@ -200,8 +201,8 @@ body {
 .my-wall-unit {
   color: white;
   background-color: #003479;
-  margin-top: 20px;
   padding-top: 10px;
+  margin-bottom: 20px;
   padding-bottom: 10px; }
 
 .invite-button {
@@ -220,7 +221,8 @@ body {
   bottom: 13px; }
 
 .invite-button:hover {
-  text-decoration: underline;
+  background-color: white;
+  color: black;
   cursor: pointer; }
 
 @media screen and (max-width: 830px) {
@@ -255,6 +257,94 @@ body {
 #main-partial-container {
   width: 97%;
   background-color: white;
+  flex: 1;
   border: solid 1px #aaaaaa;
+  margin-bottom: 20px;
   border-radius: 6px;
   flex-shrink: 0; }
+
+/* Partial Create Publication */
+.partial-wrapper {
+  width: 100%;
+  padding: 20px 20px 0 20px;
+  box-sizing: border-box; }
+
+.titre-partial {
+  margin-bottom: 20px; }
+
+#form-new-publication {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; }
+
+#form-new-publication input[type=text] {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background: #FFFFFF;
+  padding-left: 10px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: solid 1px #aaaaaa;
+  font-size: 18px;
+  height: 40px; }
+
+#form-new-publication textarea {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background: #FFFFFF;
+  padding-left: 10px;
+  padding-top: 10px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: solid 1px #aaaaaa;
+  font-size: 18px;
+  height: 200px;
+  resize: vertical; }
+
+#form-new-publication .btn {
+  margin-right: 10px; }
+
+.btn-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px; }
+
+.btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 8px;
+  border: none;
+  width: 120px;
+  height: 40px;
+  font-size: 18px;
+  line-height: 38px;
+  cursor: pointer;
+  color: black;
+  margin-bottom: 15px; }
+
+.btn-success.btn {
+  background-color: #970083;
+  color: white; }
+
+.btn.btn-success:hover {
+  background: #7C006C;
+  cursor: pointer; }
+
+.btn-cancel.btn {
+  background-color: white;
+  color: black;
+  border: solid 2px black;
+  box-sizing: border-box; }
+
+.btn.btn-cancel:hover {
+  background: black;
+  color: white;
+  cursor: pointer; }

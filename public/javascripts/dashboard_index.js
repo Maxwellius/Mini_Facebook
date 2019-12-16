@@ -14,7 +14,13 @@ $(".tab_link").click(function(event){
   ajaxGetPartial($(event.target).data('value'));
 })
 
+$("#new-publication").click(function(event){
+  $(".tab_link").removeClass("is_active")
+  ajaxGetPartial($(event.target).data('value'));
+})
+
 function ajaxGetPartial(partial_index){
+  console.log(partial_index)
   $.ajax({
     url: '/getpartial',
     type: 'POST',

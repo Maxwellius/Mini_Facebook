@@ -1,11 +1,12 @@
-var sql = require('./db.js.js')
+var sql = require('./db.js')
 
-var Message = function (newId, newTitre, newContenu, newImage) {
+var Message = function (newId, newTitre, newContenu, newImage, newIdAuteur) {
   this.id = -1
   this.titre = ""
   this.contenu = ""
   this.date = ""
   this.image = ""
+  this.idAuteur = ""
 
   if (!newId === undefined) {
     this.id = newId
@@ -19,52 +20,24 @@ var Message = function (newId, newTitre, newContenu, newImage) {
   if (!newImage === undefined) {
     this.image = newImage
   }
-  date = Date.prototype.getDate + '/' + Date.prototype.getMonth + '/' + Date.prototype.getFullYear;
+  if (!newIdAuteur === undefined) {
+    this.idAuteur = newIdAuteur
+  }
+  this.date = "date"
 
-  this.create = function () {
-    console.log(this)
-    // if (this.id != -1) {
-    //Pas besoin de vérifier s'il le message existe car il peut y avoir plusieurs fois le meme message!!!
-    // const checkResult = Message.checkIfExists(this.titre, function(checkResult){
-    //     //Si (le login de l'utilisateur existe ET l'id est celui de l'utilisateur) OU (le login de l'utilisateur n'existe pas encore) ALORS on peut modifier
-    //     if ((checkResult.exists && checkResult.mess.id === this.id) || !checkResult.exists) {
-    //         //L'utilisateur existe dans la base, on le modifie.
-    //         sql.query("UPDATE message SET titre = ?, contenu = ?, image = ? WHERE id = ?", [this.titre, this.contenu, this.image, this.date, this.id], function (err, res) {
-    //             if (err) {
-    //                 console.log("Erreur SQL : " + err)
-    //                 return false;
-    //             } else {
-    //                 console.log("Sauvegarde Réussie")
-    //                 return true;
-    //             }
-    //         })
-    //     } else {
-    //         //Un autre utilisateur a déjà le login
-    //         return false
-    //     }
-    // })
-    // } else {
-    const editMessage = this
-
-    sql.query("INSERT INTO message SET titre = ?, contenu = ?, dateEcrit = ?, image = ?" [editMessage.titre, editMessage.contenu, editMessage.date, editMessage.image], function (err, res) {
+  this.save = function () {
+    const query = sql.query("INSERT INTO message(titre, contenu, dateEcrit, image, idAuteur) SET (?, ?, ?, ?, ?)", [this.titre, this.contenu, this.date, this.image, this.idAuteur], function (err, res) {
       if (err) {
         console.log(err)
         return false;
       } else {
         console.log("Sauvegarde Réussie");
-        editMessage.id = res.insertId;
+        this.id = res.insertId;
         return true;
       }
     })
   }
 }
-
-
-
-
-
-
-
 
 Message.getMessageById = function (messageId, result) {
   sql.query("select titre, contenu, dateEcrit, image from Message where id = ? ", messageId, function (err, res) {

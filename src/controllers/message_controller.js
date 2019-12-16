@@ -2,32 +2,27 @@ var Message = require('../models/Message');
 
 MessageController = function (req, res) {
 
-
-    this.ajoutmessage = function (titre, message, image) {
+    this.ajoutmessage = function (titre, contenu, image, idAuteur) {
         var errorString = "";
         const mess = new Message();
         //Vérification des données envoyées côté serveur
-        if (titre.length > 20 || titre.length < 1) {
+        if (titre.length > 40 || titre.length < 1) {
             errorString = "Erreur : le titre est invalide."
             console.log(errorString)
-            res.redirect('/')
-        } else if (message > 1000 || message.length < 1) {
+        } else if (contenu.length > 1000 || contenu.length < 1) {
             errorString = "Erreur : Message Invalide, il doit être compris entre 1 et 1000 caractères."
             console.log(errorString)
-            res.redirect('/')
         } else {
             mess.titre = titre
-            mess.message = message
+            mess.contenu = contenu
             mess.image = image
+            mess.idAuteur = idAuteur
             success = mess.save()
 
             if (success) {
                 console.log("Succes : " + errorString)
-                res.redirect('/')
             }
             console.log(errorString)
-            res.redirect('/')
-
         }
 
     }
@@ -52,4 +47,4 @@ MessageController = function (req, res) {
     }
 };
 
-module.exports = AccountController;
+module.exports = MessageController;

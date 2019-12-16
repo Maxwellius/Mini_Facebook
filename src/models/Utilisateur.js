@@ -46,8 +46,6 @@ var Utilisateur = function (newId, newLogin, newMdp, newNom, newPrenom, newAvata
      * d'erreur, false sinon.
      */
     this.save = function () {
-        console.log("test")
-        console.log(this)
         if (this.id != -1) {
             const checkResult = Utilisateur.checkIfExists(this.login, function(checkResult){
                 //Si (le login de l'utilisateur existe ET l'id est celui de l'utilisateur) OU (le login de l'utilisateur n'existe pas encore) ALORS on peut modifier

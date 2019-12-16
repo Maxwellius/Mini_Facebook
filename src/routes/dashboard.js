@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+var MessageController = require("../controllers/message_controller")
 
 router.get('/', function(req, res){
   if(req.session.user === undefined || req.session.user.id === -1){
@@ -31,5 +32,11 @@ router.post('/getpartial', function(req, res){
     res.status(500).send("Invalid partial index")
   }
   
+})
+
+router.post('/new_publication', function(req, res){
+  var message_controller = new MessageController(req, res);
+  message_controller.ajoutmessage(req.body.title, req.body.content, "LeLienDeLimage", req.session.user.id); //TODO : ajouter la gestion des images
+  res.redirect('/')
 })
 module.exports = router;

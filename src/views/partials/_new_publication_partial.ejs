@@ -1,0 +1,19 @@
+<div class="partial-wrapper">
+  <h1 class="titre-partial">Votre nouvelle publication</h1>
+  <form action="/new_publication" method="POST" id="form-new-publication">
+    <label for="title">Titre de votre publication</label>
+    <input type="text" name="title" class="title-input">
+    <label for="content">Contenu de votre publication</label>
+    <textarea name="content" id="publication-content-textarea" cols="30" rows="10"></textarea>
+    <div class="btn-group">
+        <input type="submit" class="btn btn-success" value="Envoyer">
+        <div class="btn btn-cancel" id="cancel-new-publication">Annuler</div>
+    </div>
+  </form>
+</div>
+<script>
+$("#cancel-new-publication").click(function(event){
+  $(".tab_link:nth-child(1)").addClass("is_active")
+  ajaxGetPartial(0);
+})
+</script>
