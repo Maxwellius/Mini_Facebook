@@ -23,10 +23,12 @@ var Message = function (newId, newTitre, newContenu, newImage, newIdAuteur) {
   if (!newIdAuteur === undefined) {
     this.idAuteur = newIdAuteur
   }
-  this.date = "date"
+
 
   this.save = function () {
-    const query = sql.query("INSERT INTO message(titre, contenu, dateEcrit, image, idAuteur) SET (?, ?, ?, ?, ?)", [this.titre, this.contenu, this.date, this.image, this.idAuteur], function (err, res) {
+    this.date = new Date()
+    this.date = this.date.toISOString().split('T')[0] + ' ' + this.date.toTimeString().split(' ')[0];
+    const query = sql.query("INSERT INTO message SET titre = ?, contenu = ?, dateEcrit = ?, image = ?, idAuteur = ?, idAmi=2", [this.titre, this.contenu, this.date, this.image, this.idAuteur], function (err, res) {
       if (err) {
         console.log(err)
         return false;

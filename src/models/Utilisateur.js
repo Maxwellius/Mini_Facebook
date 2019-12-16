@@ -18,45 +18,31 @@ var Utilisateur = function (newId, newLogin, newMdp, newNom, newPrenom, newAvata
     this.prenom = "";
     this.avatar = "";
 
-    if (newId === undefined) {
-        if (!newLogin === undefined) {
-            this.login = newLogin;
-        }
-    
-        if (!newMdp === undefined) {
-            this.mdp = newMdp;
-        }
-    
-        if (!newNom === undefined) {
-            this.nom = newNom;
-        }
-    
-        if (!newPrenom === undefined) {
-            this.prenom = newPrenom;
-        }
-    
-        if (!newAvatar === undefined) {
-            this.avatar = newAvatar
-        }
-    } else {
-        const newUser = this
-        //Si l'id est défini, on récupère l'utilisateur
-        Utilisateur.getUtilisateurById.apply(this, [newId, (err, res) => {
-            if(err){
-                this.id = -1;
-                console.log(err)
-            } else {
-                this.id = res[0].id
-                this.login = res[0].login
-                this.mdp = res[0].mdp
-                this.nom = res[0].nom
-                this.prenom = res[0].prenom
-                this.avatar = res[0].avatar
-            }
-        }])
+    if (!newId === undefined) {
+        this.newId = newId;
     }
 
+    if (!newLogin === undefined) {
+        this.login = newLogin;
+    }
 
+    if (!newMdp === undefined) {
+        this.mdp = newMdp;
+    }
+
+    if (!newNom === undefined) {
+        this.nom = newNom;
+    }
+
+    if (!newPrenom === undefined) {
+        this.prenom = newPrenom;
+    }
+
+    if (!newAvatar === undefined) {
+        this.avatar = newAvatar
+    }
+
+    
     /**
      * @description sauvegarde l'utilisateur dans la base. Retourne true si il n'y a pas      
      * d'erreur, false sinon.
@@ -104,16 +90,16 @@ var Utilisateur = function (newId, newLogin, newMdp, newNom, newPrenom, newAvata
         }    
     }
 
-    this.getAllPublications = function (){
+    this.getAllPublications = function (callback){
         if(this.id === -1){
             console.log("Error: getAllPublications(), Utilisateur non défini")
         } else {
             sql.query('Select * From Message Where idAuteur = ?', this.id, function(err, res){
                 if(err){
                     console.log(err);
-                    return false;
+                    callback(false)
                 } else {
-                    return res;
+                    callback(res)
                 }
             })
         }
@@ -180,18 +166,29 @@ Utilisateur.checkIfExists = function (login, callback) {
     })
 }
 
+/** @description : Retourne l'utilisateur en le sélectionnant par Id 
+ * @param utilisateurId int
+ * @returns Objet {exists: bool, user: Utilisateur} exists : vrai si il existe déjà, faux sinon.
+*/
 
-Utilisateur.getUtilisateurById = function (utilisateurId, result) {
-    sql.query("Select * from utilisateur where id = ? ", utilisateurId, function (err, res) {
+Utilisateur.getUtilisateurById = function (utilisateurId, callback) {
+    sql.query("SELECT * FROM Utilisateur WHERE id = ?", utilisateurId, function (err, res) {
         if (err) {
-            console.log("error: ", err);
-            result(err, null);
+            throw err;
+        } else {
+            if (res.length > 0) {
+                oldUser = new Utilisateur(res);
+                oldUser.id = res[0].id;
+                oldUser.login = res[0].login;
+                oldUser.mdp = res[0].mdp;
+                oldUser.nom = res[0].nom;
+                oldUser.prenom = res[0].prenom;
+                callback({ exists: true, user: oldUser })
+            } else {
+                callback({ exists: false, user: null })
+            }
         }
-        else {
-            result(null, res);
-
-        }
-    });
+    })
 };
 
 

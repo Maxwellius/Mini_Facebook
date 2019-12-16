@@ -7,8 +7,17 @@ router.get('/', function(req, res){
   if(req.session.user === undefined || req.session.user.id === -1){
     res.redirect('/account/login')
   } else {
-    const connectedUser = new Utilisateur(req.session.user.id)
-    res.render('dashboard/index.ejs', {idpage: 'dashboard', user: connectedUser})
+    Utilisateur.getUtilisateurById(req.session.user.id, function(callbackObject){
+      if (callbackObject.exists){
+        callbackObject.user.getAllPublications(function(arrayResponse){
+          if(arrayResponse){
+            res.render('dashboard/index.ejs', {idpage: 'dashboard', user: callbackObject.user, arrayPublication: arrayResponse})
+          }
+        })
+      } else {
+        console.log("Erreur, utilisateur non défini")
+      }
+    })
   }
 })
 
@@ -19,7 +28,13 @@ router.post('/getpartial', function(req, res){
 
   if(partial_index === 0){
     //display partial Publications
-    res.render('partials/_publications_partial', {connectedUser: req.session.user})
+    Utilisateur.getUtilisateurById(req.session.user.id, function(callbackObject){
+      if (callbackObject.exists){
+        res.render('partials/_publications_partial.ejs', {user: callbackObject.user})
+      } else {
+        console.log("Erreur, utilisateur non défini")
+      }
+    })
   } else if(partial_index === 1){
     //display partial Amis
     res.render('partials/_amis_partial')
