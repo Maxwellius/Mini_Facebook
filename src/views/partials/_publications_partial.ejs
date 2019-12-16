@@ -1,1 +1,12 @@
-<h1>A faire: Partial publications</h1>
+<div class="partial-wrapper">
+  <% user.getAllPublications().forEach(publication => { %>
+    <div class="publication-unit">
+      <h3 class="titre-publication">Le titre de la publication</h3>
+      <p class="date-publication">Lundi 13 décembre 2019</p>
+      <p class="contenu-publication">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla quaerat saepe dolor
+        expedita exercitationem placeat consequatur at rerum laborum! Enim eius dolor harum ex nam ea quis delectus porro
+        consectetur.</p>
+      <img class="img-publication">
+    </div>
+  <%});%>
+</div>

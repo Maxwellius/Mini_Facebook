@@ -43,7 +43,6 @@ MessageController = function (req, res) {
             console.log(errorString)
             res.redirect('/')
         })
-
     }
 };
 

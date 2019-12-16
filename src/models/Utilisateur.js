@@ -18,28 +18,44 @@ var Utilisateur = function (newId, newLogin, newMdp, newNom, newPrenom, newAvata
     this.prenom = "";
     this.avatar = "";
 
-    if (!newId === undefined) {
-        this.id = newId
-    }
-    if (!newLogin === undefined) {
-        this.login = newLogin;
+    if (newId === undefined) {
+        if (!newLogin === undefined) {
+            this.login = newLogin;
+        }
+    
+        if (!newMdp === undefined) {
+            this.mdp = newMdp;
+        }
+    
+        if (!newNom === undefined) {
+            this.nom = newNom;
+        }
+    
+        if (!newPrenom === undefined) {
+            this.prenom = newPrenom;
+        }
+    
+        if (!newAvatar === undefined) {
+            this.avatar = newAvatar
+        }
+    } else {
+        const newUser = this
+        //Si l'id est défini, on récupère l'utilisateur
+        Utilisateur.getUtilisateurById.apply(this, [newId, (err, res) => {
+            if(err){
+                this.id = -1;
+                console.log(err)
+            } else {
+                this.id = res[0].id
+                this.login = res[0].login
+                this.mdp = res[0].mdp
+                this.nom = res[0].nom
+                this.prenom = res[0].prenom
+                this.avatar = res[0].avatar
+            }
+        }])
     }
 
-    if (!newMdp === undefined) {
-        this.mdp = newMdp;
-    }
-
-    if (!newNom === undefined) {
-        this.nom = newNom;
-    }
-
-    if (!newPrenom === undefined) {
-        this.prenom = newPrenom;
-    }
-
-    if (!newAvatar === undefined) {
-        this.avatar = newAvatar
-    }
 
     /**
      * @description sauvegarde l'utilisateur dans la base. Retourne true si il n'y a pas      
@@ -86,7 +102,22 @@ var Utilisateur = function (newId, newLogin, newMdp, newNom, newPrenom, newAvata
                 }
             })
         }    
-    }     
+    }
+
+    this.getAllPublications = function (){
+        if(this.id === -1){
+            console.log("Error: getAllPublications(), Utilisateur non défini")
+        } else {
+            sql.query('Select * From Message Where idAuteur = ?', this.id, function(err, res){
+                if(err){
+                    console.log(err);
+                    return false;
+                } else {
+                    return res;
+                }
+            })
+        }
+    }
 }
 
 /**
