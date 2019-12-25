@@ -1,250 +1,90 @@
-'user strict';
 var sql = require('./db.js');
+var Publication = require('./Publication.js');
+class Utilisateur{
 
-/**
- * 
- * @param {*} newId optionnal int
- * @param {*} newLogin optionnal string
- * @param {*} newMdp optionnal string
- * @param {*} newNom optionnal string
- * @param {*} newPrenom optionnal string
- * @param {*} newAvatar optionnal string
- */
-var Utilisateur = function (newId, newLogin, newMdp, newNom, newPrenom, newAvatar) {
-    this.id = -1;
-    this.login = "";
-    this.mdp = "";
-    this.nom = "";
-    this.prenom = "";
-    this.avatar = "";
+  constructor(_id, _login, _mdp, _nom, _prenom, _avatar) {
+    this.id = (_id != undefined ? _id : -1);
+    this.login = (_login != undefined ? _login : "");
+    this.mdp = (_mdp != undefined ? _mdp : "");
+    this.mdp = (_mdp != undefined ? _mdp : "");
+    this.nom = (_nom != undefined ? _nom : "");
+    this.prenom = (_prenom != undefined ? _prenom : "");
+    this.avatar = (_avatar != undefined ? _avatar : "");
+  }
 
-    if (!newId === undefined) {
-        this.newId = newId;
-    }
-
-    if (!newLogin === undefined) {
-        this.login = newLogin;
-    }
-
-    if (!newMdp === undefined) {
-        this.mdp = newMdp;
-    }
-
-    if (!newNom === undefined) {
-        this.nom = newNom;
-    }
-
-    if (!newPrenom === undefined) {
-        this.prenom = newPrenom;
-    }
-
-    if (!newAvatar === undefined) {
-        this.avatar = newAvatar
-    }
-
-    
-    /**
-     * @description sauvegarde l'utilisateur dans la base. Retourne true si il n'y a pas      
-     * d'erreur, false sinon.
-     */
-    this.save = function () {
-        if (this.id != -1) {
-            const checkResult = Utilisateur.checkIfExists(this.login, function(checkResult){
-                //Si (le login de l'utilisateur existe ET l'id est celui de l'utilisateur) OU (le login de l'utilisateur n'existe pas encore) ALORS on peut modifier
-                if ((checkResult.exists && checkResult.user.id === this.id) || !checkResult.exists) {
-                    //L'utilisateur existe dans la base, on le modifie.
-                    sql.query("UPDATE utilisateur SET login = ?, mdp = ?, nom = ?, prenom = ?, avatar = ? WHERE id = ?", [this.login, this.mdp, this.nom, this.prenom, this.avatar, this.id], function (err, res) {
-                        if (err) {
-                            console.log("Erreur SQL : " + err)
-                            return false;
-                        } else {
-                            console.log("Sauvegarde Réussie")
-                            return true;
-                        }
-                    })
-                } else {
-                    //Un autre utilisateur a déjà le login
-                    return false
-                }
-            })
-        } else {
-            const editUser = this
-            const checkResult = Utilisateur.checkIfExists(this.login, function(checkResult){
-                if(checkResult.exists){
-                    //Le login existe déjà
-                    return false
-                } else {
-                    //L'utilisateur n'existe pas dans la base, on l'insère.
-                    sql.query("INSERT INTO utilisateur SET login = ?, mdp = ?, nom = ?, prenom = ?, avatar = ?", [editUser.login, editUser.mdp, editUser.nom, editUser.prenom, editUser.avatar], function (err, res) {
-                        if (err) {
-                            console.log(err)
-                            return false;
-                        } else {
-                            console.log("Sauvegarde Réussie");
-                            editUser.id = res.insertId;
-                            return true;
-                        }
-                    })
-                }
-            })
-        }    
-    }
-
-    this.getAllPublications = function (callback){
-        if(this.id === -1){
-            console.log("Error: getAllPublications(), Utilisateur non défini")
-        } else {
-            sql.query('Select * From Message Where idAuteur = ?', this.id, function(err, res){
-                if(err){
-                    console.log(err);
-                    callback(false)
-                } else {
-                    callback(res)
-                }
-            })
-        }
-    }
-}
-
-/**
- * @description Recupère l'utilisateur par login mot de passe
- * @param login string
- * @param mdp string
- * @param callback fonction qui prends en parametre le nouvel objet user. Elle sera executée
- * de manière synchronisée
- * @returns Objet {exists: bool, user: Utilisateur} exists est vrai si l'utilisateur a été récupéré
- * faux sinon. user représente l'utilisateur rempli si il a été trouvé.
- */
-Utilisateur.getUtilisateurByLoginPassword = function (login, mdp, callback) {
-    sql.query("Select * FROM utilisateur WHERE login = ? AND mdp = ?", [login, mdp], function (err, res) {
-        if (err) {
-            //Erreur de la requête
-            throw err;
-        }
-        else {
-            if (res.length === 1) {
-                const newUser = new Utilisateur();
-                newUser.id = res[0].id;
-                newUser.login = res[0].login;
-                newUser.mdp = res[0].mdp;
-                newUser.nom = res[0].nom;
-                newUser.prenom = res[0].prenom
-                var returnObject = { exists: true, user: newUser }
-                callback(returnObject)
+  /**
+   * @description Enregistre l'objet dans la base de données en vérifiant le contenu
+   * @returns {object{success, error}} success: bool, error: string
+   */
+  async save(){
+      try {
+          const userById = await Utilisateur.getUtilisateurById(this.id);
+          if (!userById){ 
+            //L'utilisateur n'existe pas
+            if(await Utilisateur.getUtilisateurByLogin(this.login)){
+              //Si le login existe : Echec de l'enregistrement.
+              return {success:false, error: "Erreur : Le login existe déjà"};
             } else {
-                var returnObject = { exists: false, user: null }
-                callback(returnObject)
+              //Si le login n'existe pas : Nouvel utilisateur.
+				  console.log("insertion nouvel utilisateur")
+              const res = await sql.query("INSERT INTO utilisateur SET login = ?, mdp = ?, nom = ?, prenom = ?, avatar = ?", [this.login, this.mdp, this.nom, this.prenom, this.avatar]);
+              return {success:true, error:null}
             }
-        }
-    });
-}
-
-/**
- * @description Vérifie si le login est déjà présent dans la base
- * @param login string
- * @returns Objet {exists: bool, user: Utilisateur} exists : vrai si il existe déjà, faux sinon.
- * user: l'utilisateur qui existe déjà
- */
-Utilisateur.checkIfExists = function (login, callback) {
-    sql.query("SELECT * FROM Utilisateur WHERE login = ?", login, function (err, res) {
-        if (err) {
-            throw err;
-        } else {
-            if (res.length > 0) {
-                oldUser = new Utilisateur(res);
-                oldUser.id = res[0].id;
-                oldUser.login = res[0].login;
-                oldUser.mdp = res[0].mdp;
-                oldUser.nom = res[0].nom;
-                oldUser.prenom = res[0].prenom;
-                callback({ exists: true, user: oldUser })
+          } else {
+            //L'utilisateur existe déjà
+            const oldUser = await Utilisateur.getUtilisateurByLogin(this.login)
+            if((oldUser && oldUser.id === this.id) || (!oldUser)) {
+              //Le login est celui de l'utilisateur courant ou n'existe pas: changement de login
+              const res =  await sql.query("UPDATE utilisateur SET login = ?, mdp = ?, nom = ?, prenom = ?, avatar = ? WHERE id = ?", [this.login, this.mdp, this.nom, this.prenom, this.avatar, this.id]);
+              return {success:true, error:null}
             } else {
-                callback({ exists: false, user: null })
+              //Le login existe déjà et est celui de qqn d'autre : erreur
+              return {success:false, error: "Erreur : Le login existe déjà"};
             }
-        }
+          }
+      } catch(err) {
+        console.log('Utilisateur.save() ' + err);
+      }
+  }
 
-    })
+	async getAllPublications(){
+		if(this.id === -1){
+			console.log("Error : getAllPublications(), Utilisateur non défini")	
+		} else {
+			var result = await sql.query('Select * From Message Where idAuteur = ?', this.id)	
+			var arrayPublications = []	
+			result.forEach((elem)=>{
+				arrayPublications.push(new Publication(elem.id, elem.titre, elem.contenu, elem.image, elem.idAuteur))
+			})
+			return arrayPublications;
+		}
+	}
+  /**
+   * @description : Retourne vrai si le login existe déjà, faux sinon;
+   * @param {string} login 
+   *
+   */
+  static async getUtilisateurByLogin(login){
+    const res = await sql.query("SELECT * FROM Utilisateur WHERE login = ?", login);
+    if(res.length > 0){
+      return new Utilisateur(res[0].id, res[0].login, res[0].mdp, res[0].nom, res[0].prenom);
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * @description : Retourne l'utilisateur si l'id existe déjà, faux sinon
+   * @param {int} id 
+   */
+  static async getUtilisateurById(id){
+    const res = await sql.query("SELECT * FROM Utilisateur WHERE id = ?", id);
+    if(res.length > 0){
+      return new Utilisateur(res[0].id, res[0].login, res[0].mdp, res[0].nom, res[0].prenom);
+    } else {
+      return false;
+    }
+  }
 }
-
-/** @description : Retourne l'utilisateur en le sélectionnant par Id 
- * @param utilisateurId int
- * @returns Objet {exists: bool, user: Utilisateur} exists : vrai si il existe déjà, faux sinon.
-*/
-
-Utilisateur.getUtilisateurById = function (utilisateurId, callback) {
-    sql.query("SELECT * FROM Utilisateur WHERE id = ?", utilisateurId, function (err, res) {
-        if (err) {
-            throw err;
-        } else {
-            if (res.length > 0) {
-                oldUser = new Utilisateur(res);
-                oldUser.id = res[0].id;
-                oldUser.login = res[0].login;
-                oldUser.mdp = res[0].mdp;
-                oldUser.nom = res[0].nom;
-                oldUser.prenom = res[0].prenom;
-                callback({ exists: true, user: oldUser })
-            } else {
-                callback({ exists: false, user: null })
-            }
-        }
-    })
-};
-
-
-Utilisateur.getAllUtilisateur = function (result) {
-    sql.query("Select * from utilisateur", function (err, res) {
-
-        if (err) {
-            console.log("error: ", err);
-            result(null, err);
-        }
-        else {
-            console.log('tasks : ', res);
-
-            result(null, res);
-        }
-    });
-};
-
-Utilisateur.updateById = function (id, utilisateur, mdp, result) {
-    sql.query("UPDATE utilisateur SET login = ?, mdp = ? WHERE id = ?", [utilisateur.login, utilisateur.mdp, id], function (err, res) {
-        if (err) {
-            console.log("error: ", err);
-            result(null, err);
-        }
-        else {
-            result(null, res);
-        }
-    });
-};
-
-Utilisateur.remove = function (id, result) {
-    sql.query("DELETE FROM utilisateur WHERE id = ?", [id], function (err, res) {
-
-        if (err) {
-            console.log("error: ", err);
-            result(null, err);
-        }
-        else {
-
-            result(null, res);
-        }
-    });
-};
-
-Utilisateur.updateAvatarById = function (id, newavatar, result) {
-    sql.query("UPDATE utilisateur SET avatar = ? WHERE id = ?", [utilisateur.avatar, id], function (err, res) {
-        if (err) {
-            console.log("error: ", err);
-            result(null, err);
-        }
-        else {
-            result(null, res);
-        }
-    });
-};
-
-
 
 module.exports = Utilisateur;

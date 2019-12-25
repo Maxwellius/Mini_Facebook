@@ -1,17 +1,26 @@
 'user strict';
+const util = require('util');
+const mysql = require('mysql');
 
-var mysql = require('mysql');
-
-//local mysql db connection
-var connection = mysql.createConnection({
+config = {
     host     : 'localhost',
     user     : 'root',
     password : 'root',
     database : 'mini_facebook'
-});
+}
+//local mysql db connection
+function makeDB(config) {
+    const connection = mysql.createConnection(config);
 
-connection.connect(function(err) {
-    if (err) throw err;
-});
+    return {
+        query(sql, args){
+            return util.promisify(connection.query).call(connection, sql, args);
+        },
+        close(){
+            return util.promisify(connection.end).call(connection);
+        }
+    };
+}
 
-module.exports = connection;
+const db = makeDB(config)
+module.exports = db;

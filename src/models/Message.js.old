@@ -1,5 +1,4 @@
-var sql = require('./db.js')
-
+/*
 var Message = function (newId, newTitre, newContenu, newImage, newIdAuteur) {
   this.id = -1
   this.titre = ""
@@ -85,4 +84,4 @@ Message.remove = function (id, result) {
     }
   })
 }
-module.exports = Message;
+*/

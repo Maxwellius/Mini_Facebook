@@ -1,10 +1,10 @@
 var express = require('express');
-var AccountController = require('../controllers/account_controller');
+var UtilisateurController = require('../controllers/utilisateur_controller');
 var router = express.Router();
 
 router.get('/login', function (req, res) {
    console.log("GET Login page");
-   if (req.session.user_id === -1 || req.session.user_id === undefined) {
+   if (req.session.user === undefined || req.session.user.id === -1) {
       //L'utilisateur n'est pas encore connecté
       res.render('account/login.ejs', { root: process.cwd(), query: req.query, idpage: 'login'});
    } else {
@@ -14,10 +14,31 @@ router.get('/login', function (req, res) {
 });
 
 router.post('/login', function (req, res) {
-   var account_controller = new AccountController(req, res);
-   account_controller.login(req.body.login, req.body.mdp);
+   var utilisateur_controller = new UtilisateurController(req, res);
+   utilisateur_controller.login(req.body.login, req.body.mdp);
 });
 
+router.get('/inscription', function(req, res){
+	console.log("GET inscription page");
+	if(req.session.user_id === -1 || req.session.user_id === undefined){
+		//L'utilisateur n'est pas encore connecté
+		res.render('account/inscription', {
+			root: process.cwd(),
+			idpage: 'inscription'
+		})
+	} else {
+		res.redirect('/')
+	}
+})
+
+router.post('/inscription', async function(req, res){
+	console.log("POST inscription")
+	var utilisateur_controller = new UtilisateurController(req, res);
+	var errorString = "";
+	await utilisateur_controller.inscription(req.body.login, req.body.mdp, req.body.nom, req.body.prenom)
+})
+
+/*
 router.get('/inscription', function (req, res) {
    console.log("GET Inscription page");
    if (req.session.user_id === -1 || req.session.user_id === undefined) {
@@ -45,7 +66,7 @@ router.get('/update', function (req, res) {
 router.post('/update', function (req, res) {
    console.log("POST Modification page");
 });
-
+*/
 
 
 //export this router to use in our index.js

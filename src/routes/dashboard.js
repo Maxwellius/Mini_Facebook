@@ -3,22 +3,17 @@ var router = express.Router();
 var MessageController = require("../controllers/message_controller")
 var Utilisateur = require("../models/Utilisateur")
 
-router.get('/', function(req, res){
-  if(req.session.user === undefined || req.session.user.id === -1){
-    res.redirect('/account/login')
-  } else {
-    Utilisateur.getUtilisateurById(req.session.user.id, function(callbackObject){
-      if (callbackObject.exists){
-        callbackObject.user.getAllPublications(function(arrayResponse){
-          if(arrayResponse){
-            res.render('dashboard/index.ejs', {idpage: 'dashboard', user: callbackObject.user, arrayPublication: arrayResponse})
-          }
-        })
-      } else {
-        console.log("Erreur, utilisateur non défini")
-      }
-    })
-  }
+router.get('/', async function(req, res){
+  	if(req.session.user === undefined || req.session.user.id === -1){
+		res.redirect('/account/login') //Utilisateur non défini
+  	} else {
+		var user = await Utilisateur.getUtilisateurById(req.session.user.id); //Utilisateur défini
+		var arrayPublications = await user.getAllPublications() 
+		if(arrayPublications){
+			console.log(arrayPublications)
+			res.render('dashboard/index.ejs', {idpage: 'dashboard', user: req.session.user, arrayPublication: arrayPublications})
+		}
+	}
 })
 
 router.post('/getpartial', function(req, res){
