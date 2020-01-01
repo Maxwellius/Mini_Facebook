@@ -183,10 +183,12 @@ body {
   margin-bottom: 20px; }
 
 .profile-unit {
+  text-decoration: none;
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 8px; }
+  margin-bottom: 8px;
+  color: black; }
 
 .profile-picture {
   width: 40px;
