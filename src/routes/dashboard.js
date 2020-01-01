@@ -46,7 +46,11 @@ router.post('/getpartial', function(req, res){
   } else if(partial_index === 10){
     //display partial Nouvelle Publication
     res.render('partials/_new_publication_partial')
-  } else {
+     
+  } else if(partial_index == 3){
+     //display partial Invitations
+     res.render('partials/_invitations_partial')
+   } else {
     //error : unknown index
     res.status(500).send("Invalid partial index")
   }

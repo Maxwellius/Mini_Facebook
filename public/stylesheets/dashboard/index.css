@@ -183,8 +183,6 @@ body {
   margin-bottom: 20px; }
 
 .profile-unit {
-   text-decoration: none;
-   color: black;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -343,8 +341,8 @@ body {
 .btn-cancel.btn {
   background-color: white;
   color: black;
-  border: solid 2px black;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  box-shadow: inset 0px 0px 0px 2px #000000; }
 
 .btn.btn-cancel:hover {
   background: black;
@@ -387,3 +385,62 @@ body {
   width: 200px;
   height: 100%;
   justify-self: end; }
+
+/** invitations unit **/
+.partial-wrapper.partial-invitations {
+  display: grid;
+  grid-template-column: 1fr 1fr;
+  grid-auto-rows: auto; }
+
+.partial-title {
+  grid-row: 1;
+  grid-column: 1/3;
+  margin-bottom: 10px; }
+
+.sentInvitations {
+  grid-column: 1; }
+  .sentInvitations h3 {
+    margin-bottom: 20px; }
+  .sentInvitations .invitation-unit {
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+    width: 85%;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px; }
+    .sentInvitations .invitation-unit .nomPrenom {
+      font-weight: bolder;
+      font-size: 18px; }
+    .sentInvitations .invitation-unit .status {
+      font-style: italic; }
+
+.receivedInvitations {
+  grid-column: 1; }
+  .receivedInvitations h3 {
+    margin-bottom: 20px; }
+  .receivedInvitations .invitation-unit {
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+    width: 85%;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px; }
+    .receivedInvitations .invitation-unit .buttons {
+      display: flex;
+      flex-direction: row;
+      align-items: center; }
+      .receivedInvitations .invitation-unit .buttons .btn {
+        padding: 0px 10px;
+        width: auto;
+        height: auto;
+        margin: 10px 5px 0px 0px; }
+    .receivedInvitations .invitation-unit .nomPrenom {
+      font-weight: bolder;
+      font-size: 18px; }
+
+.receivedInvitations {
+  grid-column: 2; }

@@ -40,6 +40,7 @@
                     <a href="" class="tab_link is_active" data-value='0'>Publications</a>
                     <a href="" class="tab_link" data-value='1'>Amis</a>
                     <a href="" class="tab_link" data-value='2'>A propos</a>
+                    <a href="" class="tab_link" data-value='3'>Invitations</a>
                 </nav>
             </div>
             <div id="main-partial-container">
@@ -50,10 +51,10 @@
             <div id="new-publication" data-value="10">
                 Nouvelle Publication
             </div>
-            <div class="profile-unit my-wall-unit">
+            <a class="profile-unit my-wall-unit" href=<%="/changeDisplayedUser?id="+ user.id%>>
                 <img class="profile-picture" src="/icons/man-with-short-hair-profile-avatar.svg"/>
                 <div class="profile-name"><%= user.nom + ' ' + user.prenom %> </div>
-            </div>
+            </a>
             <h2 class="subtitle">Nouvelles Invitations</h2>
             <div class="profile-list">
                 <div class="profile-unit">
