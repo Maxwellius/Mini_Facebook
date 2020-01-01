@@ -17,6 +17,7 @@ class UtilisateurController{
           this.res.redirect('/account/login/?valid=false')
         } else {
           this.req.session.user = user
+           this.req.session.displayedUser = user;
           this.res.redirect('/')
         }
       }, (reason) => {

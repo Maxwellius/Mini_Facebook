@@ -183,6 +183,8 @@ body {
   margin-bottom: 20px; }
 
 .profile-unit {
+   text-decoration: none;
+   color: black;
   display: flex;
   flex-direction: row;
   align-items: center;

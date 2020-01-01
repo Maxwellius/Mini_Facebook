@@ -1,17 +1,24 @@
 var express = require("express");
 var router = express.Router();
 var MessageController = require("../controllers/message_controller")
+var UtilisateurController = require("../controllers/utilisateur_controller.js")
 var Utilisateur = require("../models/Utilisateur")
+var Invitation = require("../models/Invitation")
 
 router.get('/', async function(req, res){
   	if(req.session.user === undefined || req.session.user.id === -1){
 		res.redirect('/account/login') //Utilisateur non défini
   	} else {
 		var user = await Utilisateur.getUtilisateurById(req.session.user.id); //Utilisateur défini
-		var arrayPublications = await user.getAllPublications() 
+      var displayedUser = await Utilisateur.getUtilisateurById(req.session.displayedUser.id)
+		var arrayPublications = await displayedUser.getAllPublications() 
 		if(arrayPublications){
-			console.log(arrayPublications)
-			res.render('dashboard/index.ejs', {idpage: 'dashboard', user: req.session.user, arrayPublication: arrayPublications})
+			res.render('dashboard/index.ejs', {
+            idpage: 'dashboard',
+            user: req.session.user,
+            displayedUser: req.session.displayedUser,
+            arrayPublication: arrayPublications
+         })
 		}
 	}
 })
@@ -52,4 +59,23 @@ router.post('/new_publication', function(req, res){
   res.redirect('/')
 })
 
+router.get('/changeDisplayedUser', function(req, res){
+   Utilisateur.getUtilisateurById(req.query.id).then( 
+      (value ) => {
+         const displayedUser = value
+         req.session.displayedUser = displayedUser;
+         res.redirect('/')
+      },
+      ( error ) => {
+         console.log("Promise Failed")
+      })
+})
+
+router.post('/inviteUser', function(req, res){
+   console.log(req.body)
+   const newInvitation = new Invitation(-1, req.body.sender, req.body.recipient, 1)
+   newInvitation.create().then(
+      res.json({'success':true})
+   )
+})
 module.exports = router;

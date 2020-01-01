@@ -1,11 +1,11 @@
 var sql = require('./db.js');
 var Publication = require('./Publication.js');
+var Invitation = require('./Invitation.js')
 class Utilisateur{
 
   constructor(_id, _login, _mdp, _nom, _prenom, _avatar) {
     this.id = (_id != undefined ? _id : -1);
     this.login = (_login != undefined ? _login : "");
-    this.mdp = (_mdp != undefined ? _mdp : "");
     this.mdp = (_mdp != undefined ? _mdp : "");
     this.nom = (_nom != undefined ? _nom : "");
     this.prenom = (_prenom != undefined ? _prenom : "");
@@ -47,6 +47,12 @@ class Utilisateur{
       }
   }
 
+		  async creerNouvelleAmitie(idNouvelAmi){
+		  }
+/*
+ * @description : Retourne les publications de l'utilisateur
+ * @returns array of Publication
+ */
 	async getAllPublications(){
 		if(this.id === -1){
 			console.log("Error : getAllPublications(), Utilisateur non défini")	
@@ -85,6 +91,35 @@ class Utilisateur{
       return false;
     }
   }
+   
+   /**
+    * @description : Retourne un tableau d'invitations recues, faux si aucune n'est trouvée
+    */
+   async getAllReceivedInvitations(){
+      const res = await sql.query("SELECT * FROM Invitation WHERE recipient = ?", [this.id])
+      if (res.length > 0){
+         const arrayInvitations = []
+         res.forEach((element) => {
+            arrayInvitations.push(new Invitation(element.id, element.sender, element.recipient, element.status))
+         })
+         return arrayInvitations
+      } else {
+         return false;
+      }
+   }
+
+   async getAllSentInvitations(){
+      const res = await sql.query("SELECT * FROM Invitation WHERE sender = ?", [this.id])
+      if (res.length > 0){
+         const arrayInvitations = []
+         res.forEach((element) => {
+            arrayInvitations.push(new Invitation(element.id, element.sender, elmeent.recipient, element.status))
+         })
+      } else {
+         return false;
+      }
+   }
 }
+   
 
 module.exports = Utilisateur;

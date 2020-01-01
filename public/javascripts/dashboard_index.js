@@ -35,3 +35,19 @@ function ajaxGetPartial(partial_index){
     }
   })
 }
+
+$("#invite-button").click(function(event){
+   console.log($(event.target).data('recipient'))
+   $.ajax({
+      url: '/inviteUser',
+      type: 'POST',
+      data: {
+         'sender': $(event.target).data('sender'), 
+         'recipient': $(event.target).data('recipient')
+      },
+      success: function(){
+         console.log("Invitation envoyée"); //TODO Ajouter un affichage de confirmation
+      }
+      
+   })
+})
