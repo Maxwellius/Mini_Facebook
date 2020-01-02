@@ -1,9 +1,10 @@
-var express = require("express");
-var router = express.Router();
-var MessageController = require("../controllers/message_controller")
-var UtilisateurController = require("../controllers/utilisateur_controller.js")
-var Utilisateur = require("../models/Utilisateur")
-var Invitation = require("../models/Invitation")
+const express = require("express");
+const router = express.Router();
+const MessageController = require("../controllers/message_controller")
+const UtilisateurController = require("../controllers/utilisateur_controller.js")
+const InvitationController = require("../controllers/invitation_controller.js")
+const Utilisateur = require("../models/Utilisateur")
+const Invitation = require("../models/Invitation")
 
 router.get('/', async function(req, res){
   	if(req.session.user === undefined || req.session.user.id === -1){
@@ -17,26 +18,27 @@ router.get('/', async function(req, res){
             idpage: 'dashboard',
             user: req.session.user,
             displayedUser: req.session.displayedUser,
-            arrayPublication: arrayPublications
+            arrayPublications: arrayPublications
          })
 		}
 	}
 })
 
-router.post('/getpartial', function(req, res){
+router.post('/getpartial', async function(req, res){
   var partial_index = req.body.partial_index;
   console.log('route get partial, partial index :' + partial_index);
 
 
   if(partial_index === 0){
     //display partial Publications
-    Utilisateur.getUtilisateurById(req.session.user.id, function(callbackObject){
-      if (callbackObject.exists){
-        res.render('partials/_publications_partial.ejs', {user: callbackObject.user})
-      } else {
-        console.log("Erreur, utilisateur non défini")
-      }
-    })
+      const user = await Utilisateur.getUtilisateurById(req.session.user.id) 
+      const displayedUser = await Utilisateur.getUtilisateurById(req.session.displayedUser.id)
+		const arrayPublications = await displayedUser.getAllPublications() 
+      res.render('partials/_publications_partial.ejs', {
+         user: user,
+         displayedUser: req.session.displayedUser,
+         arrayPublications: arrayPublications
+      })
   } else if(partial_index === 1){
     //display partial Amis
     res.render('partials/_amis_partial')
@@ -48,8 +50,16 @@ router.post('/getpartial', function(req, res){
     res.render('partials/_new_publication_partial')
      
   } else if(partial_index == 3){
-     //display partial Invitations
-     res.render('partials/_invitations_partial')
+      const user = await Utilisateur.getUtilisateurById(req.session.user.id) 
+      const sentInvitationList = await InvitationController.getAllSentInvitations(req.session.user)
+     console.log(sentInvitationList)
+      const receivedInvitationList = await InvitationController.getAllReceivedInvitations(req.session.user) 
+     res.render('partials/_invitations_partial.ejs', {
+        user: user,
+        displayedUser: req.session.displayedUser,
+        receivedInvitationList: receivedInvitationList,
+        sentInvitationList: sentInvitationList
+     })
    } else {
     //error : unknown index
     res.status(500).send("Invalid partial index")

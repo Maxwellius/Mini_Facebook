@@ -1,8 +1,8 @@
 <div class="partial-wrapper">
-	<% if(arrayPublication.length === 0) { %>
+	<% if(arrayPublications.length === 0) { %>
 			<div class="emptyMessage">Cet utilisateur n'a pas encore de publication </div>
 <%	} else {
-      arrayPublication.forEach(function(element) { %>
+      arrayPublications.forEach(function(element) { %>
           <div class='publication-unit'>
             <h3 class='titre-publication'><%= element.titre %></h3>
             <p class='date-publication'><%= element.date %></p>

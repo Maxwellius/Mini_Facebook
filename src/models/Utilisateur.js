@@ -91,34 +91,6 @@ class Utilisateur{
       return false;
     }
   }
-   
-   /**
-    * @description : Retourne un tableau d'invitations recues, faux si aucune n'est trouvée
-    */
-   async getAllReceivedInvitations(){
-      const res = await sql.query("SELECT * FROM Invitation WHERE recipient = ?", [this.id])
-      if (res.length > 0){
-         const arrayInvitations = []
-         res.forEach((element) => {
-            arrayInvitations.push(new Invitation(element.id, element.sender, element.recipient, element.status))
-         })
-         return arrayInvitations
-      } else {
-         return false;
-      }
-   }
-
-   async getAllSentInvitations(){
-      const res = await sql.query("SELECT * FROM Invitation WHERE sender = ?", [this.id])
-      if (res.length > 0){
-         const arrayInvitations = []
-         res.forEach((element) => {
-            arrayInvitations.push(new Invitation(element.id, element.sender, elmeent.recipient, element.status))
-         })
-      } else {
-         return false;
-      }
-   }
 }
    
 

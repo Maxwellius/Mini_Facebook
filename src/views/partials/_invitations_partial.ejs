@@ -2,48 +2,33 @@
    <h2 class="partial-title">Gérez vos Invitations</h2>
    <div class="sentInvitations">
       <h3>Invitations envoyées</h3>
-      <div class="invitation-unit sent-invitation-unit">
-         <p class="nomPrenom">Nom Prénom </p>
-         <p class="pseudo">@pseudoEnvoyeur</p>
-         <p class="status">Envoyé</p>
-      </div>
-      <div class="invitation-unit sent-invitation-unit">
-         <p class="nomPrenom">Nom Prénom </p>
-         <p class="pseudo">@pseudoEnvoyeur</p>
-         <p class="status">Envoyé</p>
-      </div>
-      <div class="invitation-unit sent-invitation-unit">
-         <p class="nomPrenom">Nom Prénom </p>
-         <p class="pseudo">@pseudoEnvoyeur</p>
-         <p class="status">Statut : Envoyé</p>
-      </div>
+      <% if (!sentInvitationList) {%>
+         Aucune invitation envoyée
+      <% } else { sentInvitationList.forEach((invitation) => { %>
+         <div class="invitation-unit sent-invitation-unit">
+            <p class="nomPrenom"><%= invitation.recipient.prenom + ' ' + invitation.recipient.nom%></p>
+            <p class="pseudo">@<%= invitation.recipient.login %></p>
+            <p class="status">Statut : A modifier</p>
+         </div>
+      <% }) } %>
    </div>
-
    <div class="receivedInvitations">
-      <h3>Invitations recues</h3>
-      <div class="invitation-unit received-invitation-unit">
-         <p class="nomPrenom">Nom Prénom </p>
-         <p class="pseudo">@pseudoEnvoyeur</p>
-         <div class="buttons">
-            <div class="btn btn-success" data-sender="2">
-               Accepter
+      <h3>Invitations reçues</h3>
+      <% if(!receivedInvitationList){%>
+         Aucune invitation recue
+      <%} else { receivedInvitationList.forEach((invitation) =>{ %>
+            <div class="invitation-unit received-invitation-unit">
+               <p class="nomPrenom"><%= invitation.sender.prenom + ' ' + invitation.sender.nom %></p>
+               <p class="pseudo">@<%= invitation.sender.login %></p>
+               <div class="buttons">
+                  <div class="btn btn-success" data-sender="2">
+                     Accepter
+                  </div>
+                  <div class="btn btn-cancel" data-sender="2">
+                     Refuser
+                  </div>
+               </div>
             </div>
-            <div class="btn btn-cancel" data-sender="2">
-               Refuser
-            </div>
-         </div>
-      </div>
-      <div class="invitation-unit received-invitation-unit">
-         <p class="nomPrenom">Nom Prénom </p>
-         <p class="pseudo">@pseudoEnvoyeur</p>
-         <div class="buttons">
-            <div class="btn btn-success" data-sender="2">
-               Accepter
-            </div>
-            <div class="btn btn-cancel" data-sender="2">
-               Refuser
-            </div>
-         </div>
-      </div>
+         <% }) }%>
    </div>
 </div>

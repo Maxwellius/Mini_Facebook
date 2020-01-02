@@ -37,7 +37,6 @@ function ajaxGetPartial(partial_index){
 }
 
 $("#invite-button").click(function(event){
-   console.log($(event.target).data('recipient'))
    $.ajax({
       url: '/inviteUser',
       type: 'POST',
