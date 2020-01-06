@@ -7,6 +7,7 @@
     "dev": "nodemon ./index.js",
     "scss": "node-sass src/sass --watch -o public/stylesheets",
     "lint:ejs": "ejslint"
+    "start": "node ./index.js"
   },
   "keywords": [],
   "author": "",

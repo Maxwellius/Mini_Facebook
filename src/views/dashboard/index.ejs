@@ -24,7 +24,7 @@
                         <div class="username_text"><%= displayedUser.nom + ' ' + displayedUser.prenom%></div>
                         <div class="userpseudo_text">@<%= displayedUser.login %></div>
                     </div>
-                    <% if(displayedUser.id != user.id && !estAmi) { %>
+                    <% if(displayedUser.id != user.id && !estAmi && !estDejaInvite) { %>
                     <a class='invite-button' id='invite-button' data-sender="<%= user.id %>"
                         data-recipient='<%= displayedUser.id %>'>Inviter</a>
                     <% } %>
