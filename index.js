@@ -42,6 +42,8 @@ app.use('/account', account); // Route /account
 var dashboard = require('./src/routes/dashboard.js');
 app.use('/', dashboard); //Route / redirects to the /dashboard
 
+var search = require('./src/routes/search.js');
+app.use('/search', search); //Route / redirects to the /search
 
 /**
  * Server Activation
