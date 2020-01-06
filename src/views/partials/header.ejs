@@ -7,13 +7,13 @@
   </form>
   <div class="account-information">
     <img src="/icons/user.svg" alt="Icone Profil" class="user-icon">
-    <div class="account-information__nomprenom">William OLAX</div>
+    <div class="account-information__nomprenom">Alexandre SZABO</div>
     <img src="/icons/triangleicon.svg" alt="Icone Profil" class="triangle-icon closed">
   </div>
   <div class="account-information__dropdown-menu">
     <div class="dropdown__titre">
-        <img src="/icons/user.svg" alt="Icone Profil" class="user-icon">
-        <div class="nomprenom">William OLAX</div>
+      <img src="/icons/user.svg" alt="Icone Profil" class="user-icon">
+      <div class="nomprenom">Alexandre </div>
     </div>
     <a href="/account/edit">Modifier mon profil</a>
     <a href="/account/logout">Me déconnecter</a>
@@ -21,26 +21,27 @@
   <img src="/icons/menu.svg" alt="Menu" class="sandwich-menu-btn">
 </header>
 <script>
-    function extendDropdownMenu(event){
-      event.stopPropagation();
-      const dropdownmenu = document.getElementsByClassName("account-information__dropdown-menu")[0]
-      dropdownmenu.classList.toggle("is-opened");
-      const triangleicon = document.getElementsByClassName("triangle-icon")[0];
-      triangleicon.classList.toggle("opened");
-      triangleicon.classList.toggle("closed");
-    }
-    function closeMenuOnOutSide(){
-      const dropdownmenu = document.getElementsByClassName("account-information__dropdown-menu")[0]
-      const triangleicon = document.getElementsByClassName("triangle-icon")[0]
-      triangleicon.classList.remove("opened");
-      triangleicon.classList.add("closed");
-      dropdownmenu.classList.remove("is-opened");
-    }
-    document.getElementsByClassName("account-information")[0].addEventListener("click", extendDropdownMenu);
-    
-    document.addEventListener("click", closeMenuOnOutSide);
-    document.getElementsByClassName("account-information__dropdown-menu")[0].addEventListener("click",(event) => {
-      console.log("Je passe par la !")
-      event.stopPropagation();
-    })
-  </script>
+  function extendDropdownMenu(event) {
+    event.stopPropagation();
+    const dropdownmenu = document.getElementsByClassName("account-information__dropdown-menu")[0]
+    dropdownmenu.classList.toggle("is-opened");
+    const triangleicon = document.getElementsByClassName("triangle-icon")[0];
+    triangleicon.classList.toggle("opened");
+    triangleicon.classList.toggle("closed");
+  }
+
+  function closeMenuOnOutSide() {
+    const dropdownmenu = document.getElementsByClassName("account-information__dropdown-menu")[0]
+    const triangleicon = document.getElementsByClassName("triangle-icon")[0]
+    triangleicon.classList.remove("opened");
+    triangleicon.classList.add("closed");
+    dropdownmenu.classList.remove("is-opened");
+  }
+  document.getElementsByClassName("account-information")[0].addEventListener("click", extendDropdownMenu);
+
+  document.addEventListener("click", closeMenuOnOutSide);
+  document.getElementsByClassName("account-information__dropdown-menu")[0].addEventListener("click", (event) => {
+    console.log("Je passe par la !")
+    event.stopPropagation();
+  })
+</script>

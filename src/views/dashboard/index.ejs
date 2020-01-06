@@ -6,12 +6,15 @@
         <div class="left-panel">
             <h2 class="subtitle">Amis</h2>
             <div class="profile-list">
-                <% arrayAmis.forEach(ami => { %>
+                <% if(arrayAmis){
+                arrayAmis.forEach(ami => { %>
                 <a class="profile-unit" href="/changeDisplayedUser?id=<%=ami.id%>">
                     <img class="profile-picture" src="/icons/man-with-short-hair-profile-avatar.svg" />
                     <div class="profile-name"><%= ami.nom + " " + ami.prenom %></div>
                 </a>
-                <% }); %>
+                <% });} else { %>
+                Pas d'amis
+                <% } %>
             </div>
         </div>
         <div class="main-panel">
