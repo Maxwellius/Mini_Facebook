@@ -30,6 +30,7 @@ class Invitation{
     * @returns : bool : false si non trouve, Invitation si trouve
     */
    static async getInvitationById(id){
+      console.log(id)
       const res = await sql.query("SELECT * FROM Invitation WHERE id = ?", id);
       if (res.length > 0){
          return new Invitation(res[0].id, res[0].sender, res[0].recipient, res[0].status) 

@@ -33,12 +33,32 @@ class InvitationController{
             var newInvitation = new Invitation(element.id, element.sender, element.recipient, element.status)
             newInvitation.sender = await Utilisateur.getUtilisateurById(newInvitation.idSender)
             newInvitation.recipient = await Utilisateur.getUtilisateurById(newInvitation.idRecipient)
+            if(newInvitation.status === 0){
+               newInvitation.statusDesc = "Envoyée"
+            } else if(newInvitation.status === 1) {
+               newInvitation.statusDesc = "Acceptée"
+            } else if(newInvitation.status === 2) {
+               newInvitation.statusDesc = "Refusée"
+            }
             arrayInvitations.push(newInvitation)
          }
 
          return arrayInvitations
       } else {
          return false;
+      }
+   }
+   
+   static async repondreInvitation(invitationId, reponse){
+      const invitation = await Invitation.getInvitationById(invitationId)
+      invitation.status = reponse
+      await invitation.save()
+
+      //Creation de l'amitie
+      try {
+         const result = await sql.query("INSERT INTO Amitie(idUtilisateur1, idUtilisateur2, timestamp) VALUES (?,?,?)", [invitation.idSender, invitation.idRecipient, invitation.timestamp])
+      } catch (err) {
+         console.log("Error : repondreInvitation(invitationId, reponse)" + err)
       }
    }
 }

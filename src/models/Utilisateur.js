@@ -91,6 +91,11 @@ class Utilisateur{
       return false;
     }
   }
+
+   async estAmi(idUtilisateur){
+      const res = await sql.query("SELECT * FROM Amitie WHERE (idUtilisateur1 = ? AND idUtilisateur2 = ?) OR (idUtilisateur2 = ? AND idUtilisateur1 = ?)", [this.id, idUtilisateur, this.id, idUtilisateur])
+      return (res.length > 0)
+   }
 }
    
 

@@ -30,7 +30,7 @@
                         <div class="username_text"><%= displayedUser.nom + ' ' + displayedUser.prenom%></div>
                         <div class="userpseudo_text">@<%= displayedUser.login %></div>
                     </div>
-                    <% if(displayedUser.id != user.id) { %>
+                    <% if(displayedUser.id != user.id && !estAmi) { %>
                     <a class='invite-button' id='invite-button' data-sender="<%= user.id %>" data-recipient='<%= displayedUser.id %>'>Inviter</a>
                     <% } %> 
                       
@@ -40,7 +40,9 @@
                     <a href="" class="tab_link is_active" data-value='0'>Publications</a>
                     <a href="" class="tab_link" data-value='1'>Amis</a>
                     <a href="" class="tab_link" data-value='2'>A propos</a>
+                    <% if (displayedUser.id === user.id){ %>
                     <a href="" class="tab_link" data-value='3'>Invitations</a>
+                    <% } %>
                 </nav>
             </div>
             <div id="main-partial-container">
