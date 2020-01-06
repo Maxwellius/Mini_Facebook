@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 24, 2019 at 05:39 PM
+-- Generation Time: Jan 06, 2020 at 12:37 PM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.9
 
@@ -25,15 +25,36 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lien_amis`
+-- Table structure for table `Amitie`
 --
 
-CREATE TABLE `lien_amis` (
+CREATE TABLE `Amitie` (
   `id` int(11) NOT NULL,
   `idUtilisateur1` int(11) NOT NULL,
   `idUtilisateur2` int(11) NOT NULL,
-  `etat` varchar(10) NOT NULL
+  `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Invitation`
+--
+
+CREATE TABLE `Invitation` (
+  `id` int(11) NOT NULL,
+  `sender` int(11) NOT NULL,
+  `recipient` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `Invitation`
+--
+
+INSERT INTO `Invitation` (`id`, `sender`, `recipient`, `status`, `timestamp`) VALUES
+(11, 1, 2, 0, '2020-01-06 12:31:30');
 
 -- --------------------------------------------------------
 
@@ -64,7 +85,10 @@ INSERT INTO `message` (`id`, `titre`, `contenu`, `dateEcrit`, `image`, `idAuteur
 (6, '6emeMessage', 'en possession du sixieme', '2017-01-10 16:57:14', '', 4, 7),
 (7, '7emeMessage', 'le septieme', '2016-10-10 16:57:14', '', 8, 1),
 (8, '8emeMessage', 'l avant dernier qui est le 8eme', '2017-12-10 16:57:14', '', 5, 5),
-(9, '9emeMessage', 'the final 9eme message', '2017-04-10 16:57:14', '', 9, 3);
+(9, '9emeMessage', 'the final 9eme message', '2017-04-10 16:57:14', '', 9, 3),
+(10, 'Je crée une nouvelle publication', 'Le contenu de cette publication est très intéressant\r\n', '2019-12-20 21:56:18', 'LeLienDeLimage', 1, 2),
+(11, 'Nouvelle Publication', 'Texte de la nouvelle publication', '2019-12-25 17:43:30', 'LeLienDeLimage', 1, 2),
+(12, 'Un titre', 'Le contenu de ma publication', '2019-12-25 21:10:12', 'LeLienDeLimage', 12, 2);
 
 -- --------------------------------------------------------
 
@@ -94,16 +118,25 @@ INSERT INTO `utilisateur` (`id`, `login`, `mdp`, `avatar`, `nom`, `prenom`) VALU
 (6, 'jean', 'jean', '', 'Jean', 'Hubert'),
 (7, 'phillipe', 'phillipe', '', 'Philippe', 'Chauvel'),
 (8, 'francis', 'francis', '', 'Francis', 'Cariotte'),
-(9, 'sam', 'sam', '', 'Samuel', 'Desalos');
+(9, 'sam', 'sam', '', 'Samuel', 'Desalos'),
+(10, 'gjoliveau', 'gjolicaue', '', 'Joliveau', 'Gael'),
+(11, 'elodupret', 'elodupret', '', 'Eloise', 'Dupret'),
+(12, 'azertyuiop', 'azertyuiop', '', 'azerty', 'azerty');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `lien_amis`
+-- Indexes for table `Amitie`
 --
-ALTER TABLE `lien_amis`
+ALTER TABLE `Amitie`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `Invitation`
+--
+ALTER TABLE `Invitation`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -124,22 +157,28 @@ ALTER TABLE `utilisateur`
 --
 
 --
--- AUTO_INCREMENT for table `lien_amis`
+-- AUTO_INCREMENT for table `Amitie`
 --
-ALTER TABLE `lien_amis`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `Amitie`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `Invitation`
+--
+ALTER TABLE `Invitation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
