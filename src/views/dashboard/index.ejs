@@ -1,26 +1,17 @@
 <% include ../partials/head.ejs %>
+
 <body>
     <% include ../partials/header.ejs %>
     <div class="main-container close-right-panel">
         <div class="left-panel">
             <h2 class="subtitle">Amis</h2>
             <div class="profile-list">
-                <a class="profile-unit" href="/changeDisplayedUser?id=2">
-                    <img class="profile-picture" src="/icons/man-with-short-hair-profile-avatar.svg"/>
-                    <div class="profile-name">Sundar Pichai</div>
-                </a>                
-                <div class="profile-unit">
-                    <img class="profile-picture" src="/icons/man-with-short-hair-profile-avatar.svg"/>
-                    <div class="profile-name">Tim Cook</div>
-                </div>
-                <div class="profile-unit">
-                    <img class="profile-picture" src="/icons/man-with-short-hair-profile-avatar.svg"/>
-                    <div class="profile-name">George Bush</div>
-                </div>
-                <div class="profile-unit">
-                    <img class="profile-picture" src="/icons/man-with-short-hair-profile-avatar.svg"/>
-                    <div class="profile-name">Mickaël Jackson</div>
-                </div>
+                <% arrayAmis.forEach(ami => { %>
+                <a class="profile-unit" href="/changeDisplayedUser?id=<%=ami.id%>">
+                    <img class="profile-picture" src="/icons/man-with-short-hair-profile-avatar.svg" />
+                    <div class="profile-name"><%= ami.nom + " " + ami.prenom %></div>
+                </a>
+                <% }); %>
             </div>
         </div>
         <div class="main-panel">
@@ -31,9 +22,10 @@
                         <div class="userpseudo_text">@<%= displayedUser.login %></div>
                     </div>
                     <% if(displayedUser.id != user.id && !estAmi) { %>
-                    <a class='invite-button' id='invite-button' data-sender="<%= user.id %>" data-recipient='<%= displayedUser.id %>'>Inviter</a>
-                    <% } %> 
-                      
+                    <a class='invite-button' id='invite-button' data-sender="<%= user.id %>"
+                        data-recipient='<%= displayedUser.id %>'>Inviter</a>
+                    <% } %>
+
                 </div>
                 <img src="" alt="" class="profile-picture big-picture">
                 <nav class="wall-header__navigation">
@@ -54,25 +46,25 @@
                 Nouvelle Publication
             </div>
             <a class="profile-unit my-wall-unit" href=<%="/changeDisplayedUser?id="+ user.id%>>
-                <img class="profile-picture" src="/icons/man-with-short-hair-profile-avatar.svg"/>
+                <img class="profile-picture" src="/icons/man-with-short-hair-profile-avatar.svg" />
                 <div class="profile-name"><%= user.nom + ' ' + user.prenom %> </div>
             </a>
             <h2 class="subtitle">Nouvelles Invitations</h2>
             <div class="profile-list">
                 <div class="profile-unit">
-                    <img class="profile-picture" src="/icons/man-with-short-hair-profile-avatar.svg"/>
+                    <img class="profile-picture" src="/icons/man-with-short-hair-profile-avatar.svg" />
                     <div class="profile-name">Sundar Pichai</div>
-                </div>                
+                </div>
                 <div class="profile-unit">
-                    <img class="profile-picture" src="/icons/man-with-short-hair-profile-avatar.svg"/>
+                    <img class="profile-picture" src="/icons/man-with-short-hair-profile-avatar.svg" />
                     <div class="profile-name">Tim Cook</div>
                 </div>
                 <div class="profile-unit">
-                    <img class="profile-picture" src="/icons/man-with-short-hair-profile-avatar.svg"/>
+                    <img class="profile-picture" src="/icons/man-with-short-hair-profile-avatar.svg" />
                     <div class="profile-name">George Bush</div>
                 </div>
                 <div class="profile-unit">
-                    <img class="profile-picture" src="/icons/man-with-short-hair-profile-avatar.svg"/>
+                    <img class="profile-picture" src="/icons/man-with-short-hair-profile-avatar.svg" />
                     <div class="profile-name">Mickaël Jackson</div>
                 </div>
             </div>
@@ -81,5 +73,5 @@
     </div>
     <script type="text/javascript" src="/javascripts/dashboard_index.js"></script>
 </body>
-</html>
 
+</html>
