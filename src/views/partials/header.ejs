@@ -7,13 +7,13 @@
   </form>
   <div class="account-information">
     <img src="/icons/user.svg" alt="Icone Profil" class="user-icon">
-    <div class="account-information__nomprenom">Alexandre SZABO</div>
+    <div class="account-information__nomprenom"><%=user.prenom + " " + user.nom %></div>
     <img src="/icons/triangleicon.svg" alt="Icone Profil" class="triangle-icon closed">
   </div>
   <div class="account-information__dropdown-menu">
     <div class="dropdown__titre">
       <img src="/icons/user.svg" alt="Icone Profil" class="user-icon">
-      <div class="nomprenom">Alexandre </div>
+      <div class="nomprenom"><%=user.prenom + " " + user.nom %></div>
     </div>
     <a href="/account/edit">Modifier mon profil</a>
     <a href="/account/logout">Me déconnecter</a>
