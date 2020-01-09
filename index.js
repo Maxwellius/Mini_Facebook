@@ -15,7 +15,7 @@ const bodyParser = require('body-parser');
  */
 
 const app = express();
-const port = process.env.PORT || "8000";
+const port = process.env.NODE_PORT || "8000";
 
 /**
  *  App Configuration
@@ -24,11 +24,7 @@ app.set('view engine', 'ejs'); // ejs setup
 app.set('views', path.join(__dirname, '/src/views')) // session setup
 app.use(session({secret: 'sssshhhhh'}))
 
-
-
 app.use(express.static(path.join(__dirname, 'public')));//static public folder
-
-
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
@@ -50,6 +46,6 @@ app.use('/', dashboard); //Route / redirects to the /dashboard
 app.listen(port, () => {
   console.log(`Listening to requests on http://localhost:${port}`);
   if (process.send) {
-    process.send({ event:'online', url:'http://localhost:8000/' });
+    process.send({ event:'online', url:`http://localhost:${port}/`});
   }
 });

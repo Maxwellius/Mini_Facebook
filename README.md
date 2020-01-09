@@ -16,6 +16,10 @@ Les 2 photos suivantes montrent une possibilités pour la page de gestion des am
 
 Lancer la commande `npm install`
 
+### Sécurisation du projet
+
+Configurer les variables d'environnement `$MYSQL_HOST`, `$MYSQL_LOGIN`, `$MYSQL_PASSWORD`, `$NODE_PORT`
+
 ### Lancement des serveurs de développement
 
 Pour pouvoir tester le code, il faudra lancer les deux serveurs: Le code node et le compilateur de sass

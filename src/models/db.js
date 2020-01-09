@@ -3,9 +3,9 @@ const util = require('util');
 const mysql = require('mysql');
 
 config = {
-    host     : 'localhost',
-    user     : 'root',
-    password : 'root',
+    host     : process.env.MYSQL_HOST,
+    user     : process.env.MYSQL_LOGIN,
+    password : process.env.MYSQL_PASSWORD,
     database : 'mini_facebook'
 }
 //local mysql db connection
