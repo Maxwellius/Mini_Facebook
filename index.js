@@ -39,7 +39,7 @@ var dashboard = require('./src/routes/dashboard.js');
 app.use('/', dashboard); //Route / redirects to the /dashboard
 
 var search = require('./src/routes/search.js');
-app.use('/search', search); //Route / redirects to the /search
+app.use('/search', search); //Route /search
 
 /**
  * Server Activation
