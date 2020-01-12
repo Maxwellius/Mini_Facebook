@@ -1,4 +1,5 @@
 var Utilisateur = require('../models/Utilisateur');
+var InvitationController = require('../controllers/invitation_controller')
 const sql = require('../models/db.js')
 
 
@@ -69,22 +70,25 @@ class UtilisateurController {
 			}
 		}
 	}
-	static async getAllAmis(id) {
-		const result = await sql.query("Select * From Amitie  Where idUtilisateur1 = ? OR idUtilisateur2 = ? ", [id, id])
+	static async getAllAmis(idDisplayedUser, idUser) {
+		const result = await sql.query("Select * From Amitie  Where idUtilisateur1 = ? OR idUtilisateur2 = ? ", [idDisplayedUser, idDisplayedUser])
 		if (result.length > 0) {
 			const arrayIdAmis = []
 			for (const element of result) {
 				var idAmi
-				if (element.idUtilisateur1 == id) {
+				if (element.idUtilisateur1 == idDisplayedUser) {
 					idAmi = element.idUtilisateur2
-				} else if (element.idUtilisateur2 == id) {
+				} else if (element.idUtilisateur2 == idDisplayedUser) {
 					idAmi = element.idUtilisateur1
 				}
 				arrayIdAmis.push(idAmi)
 			}
 			const arrayAllAmis = []
 			for (const element of arrayIdAmis) {
-				arrayAllAmis.push(await Utilisateur.getUtilisateurById(element))
+            const newAmi = await Utilisateur.getUtilisateurById(element)
+            newAmi.estAmiCourant = await newAmi.estAmi(idUser)
+            newAmi.estDejaInvite = await InvitationController.isAlreadyInvited(idUser, newAmi.id)
+				arrayAllAmis.push(newAmi)
 			}
 			return arrayAllAmis
 		} else {

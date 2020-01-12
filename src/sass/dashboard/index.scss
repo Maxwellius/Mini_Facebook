@@ -514,7 +514,7 @@ body{
 }
 
 .receivedInvitations{
-   grid-column: 1;
+   grid-column: 2;
 
    h3{
       margin-bottom: 20px;
@@ -548,6 +548,58 @@ body{
 
    }
 }
-.receivedInvitations{
-   grid-column: 2;
+
+
+.partial-wrapper.partial-amis{
+   display: grid;
+   grid-template-column: 1fr 1fr;
+   grid-auto-rows: auto;
 }
+
+.ami-unit{
+   padding: 10px;
+   border: 1px solid #aaaaaa;
+   width: 85%;
+   border-radius: 8px;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   margin-bottom: 10px;
+
+   .nomPrenom{
+      font-weight: bolder;
+      font-size: $font-size-normal;
+   }
+
+   .amiStatus{
+      cursor: normal;
+      padding:5px 10px;
+      border-radius: 6px;
+      margin-top: 5px;
+   }
+   .amiStatus-Yes{
+      background-color: $green-valid;
+      color: white;
+   }
+   .amiStatus-You{
+      background-color: $mardi-gras;
+      color: white;
+   }
+   .amiStatus-NotInvited{
+     box-shadow: inset 0px 0px 0px 2px #000000;
+     color:black;
+     cursor: pointer;
+   }
+   .amiStatus-NotInvited:hover{
+      background-color: black;
+      color:white;
+   }
+   .amiStatus-Invited{
+      background-color: #000000;
+      color: white;
+      cursor: normal
+   }
+}
+
+
+

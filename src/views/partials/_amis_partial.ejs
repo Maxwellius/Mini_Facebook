@@ -1,1 +1,29 @@
-<h1>A faire : Partial amis</h1>
+<div class="partial-wrapper partial-amis">
+   <% if(user.id != displayedUser.id){ %>
+      <h2 class="partial-title">Les amis de <%= user.nom + ' ' + user.prenom %></h2>
+   <% } else { %>
+      <h2 class="partial-title">Vos amis</h2>
+   <% } %>
+
+   <% if(!arrayAmis){%>
+      Aucun ami
+   <%} else { arrayAmis.forEach((ami) => { %>
+      <div class="ami-unit">
+         <img class="image"></img>
+         <p class="nomPrenom"><%= ami.prenom + ' ' + ami.nom %></p>
+         <p class="pseudo">@<%= ami.login %></p>
+         <% if(ami.estAmiCourant){ %> 
+            <p class="amiStatus amiStatus-Yes">Ami</p>
+         <% } else if(ami.id === user.id) { %> 
+            <p class="amiStatus amiStatus-You">Vous-Même</p>
+         <% } else { %> 
+            <% if(ami.estDejaInvite){ %> 
+               <a class="amiStatus amiStatus-Invited">Invité</a>
+            <% } else { %> 
+               <a class="amiStatus amiStatus-NotInvited">Inviter</a>
+            <% } %>
+         <% }%>
+      </div>
+      <%})%>
+   <%}%>
+</div>

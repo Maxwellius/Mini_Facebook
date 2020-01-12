@@ -63,7 +63,7 @@ class InvitationController{
    }
 
    static async isAlreadyInvited(sender, recipient){
-      const result = await sql.query("SELECT * FROM Amitie WHERE (idUtilisateur1 = ? AND idUtilisateur2 = ?) OR (idUtilisateur1 = ? AND idUtilisateur2 = ?)", [sender, recipient, recipient, sender])
+      const result = await sql.query("SELECT * FROM Invitation WHERE (sender = ? AND recipient = ?) OR (sender = ? AND recipient = ?)", [sender, recipient, recipient, sender])
       if(result.length > 0){
          return true
       } else {

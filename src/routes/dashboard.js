@@ -16,7 +16,6 @@ router.get('/', async function(req, res){
       var estAmi = await user.estAmi(displayedUser.id)
       var arrayAmis = await UtilisateurController.getAllAmis(user.id)
       var estDejaInvite = await InvitationController.isAlreadyInvited(req.session.user.id, displayedUser.id)
-      console.log(estDejaInvite)
 		if(arrayPublications){
 			res.render('dashboard/index.ejs', {
             idpage: 'dashboard',
@@ -48,7 +47,17 @@ router.post('/getpartial', async function(req, res){
       })
   } else if(partial_index === 1){
     //display partial Amis
-    res.render('partials/_amis_partial')
+      const user = await Utilisateur.getUtilisateurById(req.session.user.id);
+      const displayedUser = await Utilisateur.getUtilisateurById(req.session.displayedUser.id)
+      const estAmi = await user.estAmi(displayedUser.id)
+      const arrayAmis = await UtilisateurController.getAllAmis(displayedUser.id, user.id)
+      
+     res.render('partials/_amis_partial', {
+        user: req.session.user,
+        displayedUser: req.session.displayedUser,
+        estAmi: estAmi,
+        arrayAmis: arrayAmis
+     })
   } else if(partial_index === 2){
     //display partial A propos
     res.render('partials/_description_partial')
