@@ -46,7 +46,6 @@
 
 <script>
    $('.btn-answer-invitation').click(function(event){
-      console.log($(event.target).data('status'))
       $.ajax({
          url: '/answerInvitation',
          type: 'POST',
@@ -56,8 +55,8 @@
             'invitationid': $(event.target).data('invitationid'),
             'reponse': $(event.target).data('status')
          },
-         success: function(){
-            console.log("Invitation acceptée ou refusée"); //TODO Ajouter un affichage de confirmations
+         success: function(partial_html){
+            $('#main-partial-container').html(partial_html)
          }
       })
    })

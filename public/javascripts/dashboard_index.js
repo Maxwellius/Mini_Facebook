@@ -37,7 +37,9 @@ function ajaxGetPartial(partial_index){
 }
 
 $("#invite-button").click(function(event){
-   $("#invite-button").remove()
+   $("#invite-button").unbind("click")
+   $("#invite-button").addClass('invited')
+   $("#invite-button").text("Invité")
    $.ajax({
       url: '/inviteUser',
       type: 'POST',
@@ -46,7 +48,7 @@ $("#invite-button").click(function(event){
          'recipient': $(event.target).data('recipient')
       },
       success: function(){
-         console.log("Invitation envoyée"); //TODO Ajouter un affichage de confirmation
+         console.log("Invitation Réussie")
       }
       
    })

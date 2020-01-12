@@ -42,7 +42,6 @@ class InvitationController{
             }
             arrayInvitations.push(newInvitation)
          }
-
          return arrayInvitations
       } else {
          return false;

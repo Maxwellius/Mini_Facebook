@@ -275,10 +275,14 @@ body{
   bottom: 13px;
 }
 
-.invite-button:hover{
+.invite-button:hover, .invite-button.invited{
   background-color: white;
   color: black;
   cursor: pointer;
+}
+
+.invite-button.invited{
+   cursor: default;
 }
 
 @media screen and (max-width: 830px){
@@ -572,7 +576,7 @@ body{
    }
 
    .amiStatus{
-      cursor: normal;
+      cursor: default;
       padding:5px 10px;
       border-radius: 6px;
       margin-top: 5px;

@@ -222,10 +222,13 @@ body {
   right: 20px;
   bottom: 13px; }
 
-.invite-button:hover {
+.invite-button:hover, .invite-button.invited {
   background-color: white;
   color: black;
   cursor: pointer; }
+
+.invite-button.invited {
+  cursor: default; }
 
 @media screen and (max-width: 830px) {
   .wall-header {
@@ -462,7 +465,7 @@ body {
     font-weight: bolder;
     font-size: 18px; }
   .ami-unit .amiStatus {
-    cursor: normal;
+    cursor: default;
     padding: 5px 10px;
     border-radius: 6px;
     margin-top: 5px; }

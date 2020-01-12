@@ -107,11 +107,18 @@ router.get('/changeDisplayedUser', function(req, res){
       })
 })
 
-router.post('/inviteUser', function(req, res){
+router.post('/inviteUser', async function(req, res){
    const newInvitation = new Invitation(-1, req.body.sender, req.body.recipient, 0)
-   newInvitation.create().then(
-      res.json({'success':true})
-   )
+   const succesInvitation = await newInvitation.create()
+   const user = await Utilisateur.getUtilisateurById(req.session.user.id)
+   const sentInvitationList = await InvitationController.getAllSentInvitations(req.session.user)
+   var receivedInvitationList = await InvitationController.getAllReceivedInvitations(req.session.user)
+   res.render('partials/_invitations_partial.ejs', {
+      user: user,
+      displayedUser: req.session.displayedUser,
+      receivedInvitationList: receivedInvitationList,
+      sentInvitationList: sentInvitationList
+   })
 })
 
 router.post('/answerInvitation', async function(req, res){
@@ -119,6 +126,13 @@ router.post('/answerInvitation', async function(req, res){
    await InvitationController.repondreInvitation(req.body.invitationid, req.body.reponse)
    const sentInvitationList = await InvitationController.getAllSentInvitations(req.session.user)
    var receivedInvitationList = await InvitationController.getAllReceivedInvitations(req.session.user)
+   if(receivedInvitationList){
+      if(receivedInvitationList.filter(function(e){return e.status === 0}).length === 0){
+         receivedInvitationList = false;
+      } else {
+         receivedInvitationList = receivedInvitationList.filter(function(e){return e.status === 0})
+      }
+   } 
    res.render('partials/_invitations_partial.ejs', {
       user: user,
       displayedUser: req.session.displayedUser,

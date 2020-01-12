@@ -18,12 +18,32 @@
             <p class="amiStatus amiStatus-You">Vous-Même</p>
          <% } else { %> 
             <% if(ami.estDejaInvite){ %> 
-               <a class="amiStatus amiStatus-Invited">Invité</a>
+            <p class="amiStatus amiStatus-Invited">Invité</p>
             <% } else { %> 
-               <a class="amiStatus amiStatus-NotInvited">Inviter</a>
+               <a class="amiStatus amiStatus-NotInvited inviteButton" data-sender="<%= user.id %>" data-recipient="<%= ami.id %>">Inviter</a>
             <% } %>
          <% }%>
       </div>
       <%})%>
    <%}%>
 </div>
+
+<script>
+   $(".inviteButton").click(function(event){
+      $(event.target).unbind("click")
+      $(event.target).text("Invité")
+      $(event.target).addClass("amiStatus-Invited")
+      $(event.target).removeClass("amiStatus-NotInvited")
+      $.ajax({
+         url: '/inviteUser',
+         type: 'POST',
+         data: {
+            'sender': $(event.target).data('sender'), 
+            'recipient': $(event.target).data('recipient')
+         },
+         success: function(){
+            console.log("Invitation envoyée")
+         }
+      })
+   })
+</script>

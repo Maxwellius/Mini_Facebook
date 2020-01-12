@@ -11,8 +11,13 @@ class Invitation{
 
    async create(){
       try {
-         const res = await sql.query("INSERT INTO Invitation(sender, recipient, status) VALUES( ?,?,?)", [this.idSender, this.idRecipient, this.status]);
-         
+         const check = await sql.query("SELECT * FROM Invitation WHERE (sender = ? AND recipient= ? AND status = 2) OR (sender = ? AND recipient = ? AND status = 2)", [this.idSender, this.idRecipient, this.idRecipient, this.idSender])
+         if(check.length > 0){
+            return false
+         } else {
+            const res = await sql.query("INSERT INTO Invitation(sender, recipient, status) VALUES( ?,?,?)", [this.idSender, this.idRecipient, this.status]);
+            return true
+         }
       } catch(err) {
          console.log("Error : Invitation.create()" + err);
       }
