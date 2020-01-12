@@ -53,3 +53,13 @@ $("#invite-button").click(function(event){
       
    })
 })
+
+function refreshLeftPanel(){
+   $.ajax({
+      url:'/refreshAmisPanel',
+      type: 'POST',
+      success: function(leftPanelHTML){
+         $(".left-panel").html(leftPanelHTML)
+      }
+   })
+}

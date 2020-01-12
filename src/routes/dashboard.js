@@ -140,4 +140,13 @@ router.post('/answerInvitation', async function(req, res){
       sentInvitationList: sentInvitationList
    })
 })
+
+router.post('/refreshAmisPanel', async function(req, res){
+   var user = await Utilisateur.getUtilisateurById(req.session.user.id); //Utilisateur défini
+   var arrayAmis = await UtilisateurController.getAllAmis(user.id)
+   res.render('partials/_amis_left_partial.ejs', {
+      user: user,
+      arrayAmis: arrayAmis
+   })
+})
 module.exports = router;
