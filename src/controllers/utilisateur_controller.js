@@ -97,6 +97,34 @@ class UtilisateurController {
 	}
 
 
+   static async getSuggestion(idUser){
+      const result = await sql.query("SELECT Utilisateur.id FROM Utilisateur LEFT JOIN Amitie ON (Utilisateur.id = Amitie.idUtilisateur1 OR utilisateur.id = Amitie.idUtilisateur2) WHERE Utilisateur.id != ? AND (Amitie.idUtilisateur1 IS NULL OR Amitie.idUtilisateur1 != ?) AND (Amitie.idUtilisateur2 IS NULL OR Amitie.idUtilisateur2 != ?) ORDER BY RAND() LIMIT 4", [idUser, idUser, idUser])
+      if (result.length > 0){
+         const arraySuggestions = []
+         for(const element of result){
+            const newUser = await Utilisateur.getUtilisateurById(element.id)
+            arraySuggestions.push(newUser)
+         }
+         return arraySuggestions
+      }
+   }
+
+
+   static async searchUser(textSent){
+      const preparedText = '%' + textSent + '%'
+      const result = await sql.query("SELECT * FROM Utilisateur WHERE login like ? OR prenom like ? OR nom like ? LIMIT 15", [preparedText, preparedText, preparedText])
+      if (result.length > 0){
+         const arraySearchedUser = []
+         for(const element of result){
+            const newUser = await Utilisateur.getUtilisateurById(element.id)
+            arraySearchedUser.push(newUser)
+         }
+         console.log(arraySearchedUser)
+         return arraySearchedUser
+      } else {
+         return false
+      }
+   }
 }
 
 module.exports = UtilisateurController;

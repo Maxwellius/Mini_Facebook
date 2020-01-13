@@ -21,7 +21,7 @@
             <div class="wall-header">
                 <div class="wall-picture">
                     <div class="usertags">
-                        <div class="username_text"><%= displayedUser.nom + ' ' + displayedUser.prenom%></div>
+                        <div class="username_text"><%= displayedUser.prenom + ' ' + displayedUser.nom%></div>
                         <div class="userpseudo_text">@<%= displayedUser.login %></div>
                     </div>
                     <% if(displayedUser.id != user.id && !estAmi) { %>
@@ -62,24 +62,17 @@
                 <img class="profile-picture" src="/icons/man-with-short-hair-profile-avatar.svg" />
                 <div class="profile-name"><%= user.nom + ' ' + user.prenom %> </div>
             </a>
-            <h2 class="subtitle">Nouvelles Invitations</h2>
+            <h2 class="subtitle">Découvrir des contacts</h2>
             <div class="profile-list">
-                <div class="profile-unit">
+                <% if(arraySuggestions){
+                arraySuggestions.forEach(sugg => { %>
+                <a class="profile-unit" href="/changeDisplayedUser?id=<%=sugg.id%>">
                     <img class="profile-picture" src="/icons/man-with-short-hair-profile-avatar.svg" />
-                    <div class="profile-name">Sundar Pichai</div>
-                </div>
-                <div class="profile-unit">
-                    <img class="profile-picture" src="/icons/man-with-short-hair-profile-avatar.svg" />
-                    <div class="profile-name">Tim Cook</div>
-                </div>
-                <div class="profile-unit">
-                    <img class="profile-picture" src="/icons/man-with-short-hair-profile-avatar.svg" />
-                    <div class="profile-name">George Bush</div>
-                </div>
-                <div class="profile-unit">
-                    <img class="profile-picture" src="/icons/man-with-short-hair-profile-avatar.svg" />
-                    <div class="profile-name">Mickaël Jackson</div>
-                </div>
+                    <div class="profile-name"><%= sugg.prenom + " " + sugg.nom %></div>
+                </a>
+                <% });} else { %>
+                  Pas de suggestion 
+                <% } %>
             </div>
         </div>
 

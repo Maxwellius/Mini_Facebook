@@ -1,9 +1,10 @@
 <header>
   <div class="header-logo">Mini Facebook</div>
   <span class="separator"></span>
-  <form action="/search" class="form-header">
+  <form autocomplete="off" class="form-header">
     <input type="text" name="contentToSearch" id="textbox-search" placeholder="Rechercher...">
-    <input type="submit" value="Go" class="form-header__submit-btn">
+    <div class="searchSuggestion">
+    </div>
   </form>
   <div class="account-information">
     <img src="/icons/user.svg" alt="Icone Profil" class="user-icon">
@@ -43,5 +44,38 @@
   document.getElementsByClassName("account-information__dropdown-menu")[0].addEventListener("click", (event) => {
     console.log("Je passe par la !")
     event.stopPropagation();
+  })
+
+  $(window).click(function(){
+     $('#textbox-search').removeClass('is-extended')
+     $('.searchSuggestion').removeClass('is-extended')
+  })
+  $('#textbox-search').click(function(event){
+     event.stopPropagation()
+  })
+  $('.searchSuggestion').click(function(event){
+     event.stopPropagation()
+  })
+  $('#textbox-search').on('input', function(){
+     if(!$('#textbox-search').val()){
+        $('#textbox-search').removeClass('is-extended')
+        $('.searchSuggestion').removeClass('is-extended')
+     } else {
+        $.ajax({
+           url: '/searchSuggestion',
+           type: 'POST',
+           data: {
+              text : $('#textbox-search').val()
+           },
+           success: function(search_html){
+              $('.searchSuggestion').html(search_html)
+              $('#textbox-search').addClass('is-extended')
+              $('.searchSuggestion').addClass('is-extended')
+           },
+           error: function(err){
+              console.log(err)
+           }
+        })
+     }
   })
 </script>

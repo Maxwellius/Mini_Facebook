@@ -16,6 +16,7 @@ router.get('/', async function(req, res){
       var estAmi = await user.estAmi(displayedUser.id)
       var arrayAmis = await UtilisateurController.getAllAmis(user.id)
       var estDejaInvite = await InvitationController.isAlreadyInvited(req.session.user.id, displayedUser.id)
+      var arraySuggestions = await UtilisateurController.getSuggestion(req.session.user.id)
 		if(arrayPublications){
 			res.render('dashboard/index.ejs', {
             idpage: 'dashboard',
@@ -24,7 +25,8 @@ router.get('/', async function(req, res){
             arrayPublications: arrayPublications,
             estAmi: estAmi,
             arrayAmis: arrayAmis,
-            estDejaInvite: estDejaInvite
+            estDejaInvite: estDejaInvite,
+            arraySuggestions: arraySuggestions
          })
 		}
 	}
@@ -147,6 +149,14 @@ router.post('/refreshAmisPanel', async function(req, res){
    res.render('partials/_amis_left_partial.ejs', {
       user: user,
       arrayAmis: arrayAmis
+   })
+})
+
+router.post('/searchSuggestion', async function(req, res){
+   const text = req.body.text
+   const arraySuggestions = await UtilisateurController.searchUser(text)
+   res.render('partials/_suggestions_partial.ejs', {
+      arraySuggestions : arraySuggestions
    })
 })
 module.exports = router;

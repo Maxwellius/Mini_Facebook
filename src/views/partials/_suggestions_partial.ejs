@@ -1,0 +1,7 @@
+<% if(!arraySuggestions){ %>
+   Aucune suggestion
+<% } else { arraySuggestions.forEach((suggestedUser) => { %> 
+<a href="/changeDisplayedUser?id=<%=suggestedUser.id%>"><%= suggestedUser.prenom + ' ' + suggestedUser.nom %></a>
+<% }) %>
+   
+<% } %>
