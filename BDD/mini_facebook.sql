@@ -47,7 +47,7 @@ CREATE TABLE `Invitation` (
   `recipient` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1; 
 
 -- --------------------------------------------------------
 
