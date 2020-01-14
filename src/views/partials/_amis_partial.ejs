@@ -1,6 +1,6 @@
 <div class="partial-wrapper partial-amis">
    <% if(user.id != displayedUser.id){ %>
-      <h2 class="partial-title">Les amis de <%= displayedUser.nom + ' ' + displayedUser.prenom %></h2>
+      <h2 class="partial-title">Les amis de <%= displayedUser.prenom + ' ' + displayedUser.nom %></h2>
    <% } else { %>
       <h2 class="partial-title">Vos amis</h2>
    <% } %>

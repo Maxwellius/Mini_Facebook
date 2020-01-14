@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 06, 2020 at 12:37 PM
+-- Generation Time: Jan 14, 2020 at 12:13 PM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.9
 
@@ -47,14 +47,7 @@ CREATE TABLE `Invitation` (
   `recipient` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `Invitation`
---
-
-INSERT INTO `Invitation` (`id`, `sender`, `recipient`, `status`, `timestamp`) VALUES
-(11, 1, 2, 0, '2020-01-06 12:31:30');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -72,56 +65,36 @@ CREATE TABLE `message` (
   `idAmi` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `message`
---
-
-INSERT INTO `message` (`id`, `titre`, `contenu`, `dateEcrit`, `image`, `idAuteur`, `idAmi`) VALUES
-(1, 'test', 'alors comment ca va', '2017-10-10 16:57:14', '', 1, 1),
-(2, '2emeMessage', 'BONJOUR CECI EST LE DEUXIEME MESSAGE', '2012-10-10 16:57:14', '', 1, 1),
-(3, '3emeMessage', 'ceci est le 3ème message', '2011-10-10 16:57:14', '', 1, 1),
-(4, '4emeMessage', '4eme message', '2019-10-10 16:57:14', '', 1, 1),
-(5, '5emeMessage', 'nous avons à faire à un quatrième message', '2018-07-10 16:57:14', '', 3, 2),
-(6, '6emeMessage', 'en possession du sixieme', '2017-01-10 16:57:14', '', 4, 7),
-(7, '7emeMessage', 'le septieme', '2016-10-10 16:57:14', '', 8, 1),
-(8, '8emeMessage', 'l avant dernier qui est le 8eme', '2017-12-10 16:57:14', '', 5, 5),
-(9, '9emeMessage', 'the final 9eme message', '2017-04-10 16:57:14', '', 9, 3),
-(10, 'Je crée une nouvelle publication', 'Le contenu de cette publication est très intéressant\r\n', '2019-12-20 21:56:18', 'LeLienDeLimage', 1, 2),
-(11, 'Nouvelle Publication', 'Texte de la nouvelle publication', '2019-12-25 17:43:30', 'LeLienDeLimage', 1, 2),
-(12, 'Un titre', 'Le contenu de ma publication', '2019-12-25 21:10:12', 'LeLienDeLimage', 12, 2);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `utilisateur`
+-- Table structure for table `Utilisateur`
 --
 
-CREATE TABLE `utilisateur` (
+CREATE TABLE `Utilisateur` (
   `id` int(11) NOT NULL,
   `login` varchar(15) NOT NULL,
   `mdp` varchar(15) NOT NULL,
-  `avatar` varchar(1500) DEFAULT NULL,
+  `avatar` varchar(150) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `nom` varchar(15) NOT NULL,
   `prenom` varchar(15) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `utilisateur`
+-- Dumping data for table `Utilisateur`
 --
 
-INSERT INTO `utilisateur` (`id`, `login`, `mdp`, `avatar`, `nom`, `prenom`) VALUES
-(1, 'test', 'test', '', 'Test', 'Test'),
-(2, 'alex', 'alex', '', 'Alexandre', 'Alexandre'),
-(3, 'will', 'will', '', 'OLAX', 'William'),
-(4, 'alexandre', 'alexandre', '', 'Alex', 'Dupont'),
-(5, 'william', 'william', '', 'William', 'Shakespeare'),
-(6, 'jean', 'jean', '', 'Jean', 'Hubert'),
-(7, 'phillipe', 'phillipe', '', 'Philippe', 'Chauvel'),
-(8, 'francis', 'francis', '', 'Francis', 'Cariotte'),
-(9, 'sam', 'sam', '', 'Samuel', 'Desalos'),
-(10, 'gjoliveau', 'gjolicaue', '', 'Joliveau', 'Gael'),
-(11, 'elodupret', 'elodupret', '', 'Eloise', 'Dupret'),
-(12, 'azertyuiop', 'azertyuiop', '', 'azerty', 'azerty');
+INSERT INTO `Utilisateur` (`id`, `login`, `mdp`, `avatar`, `nom`, `prenom`) VALUES
+(23, 'jon', 'jon', NULL, 'Rettinger', 'Jon'),
+(20, 'leo', 'leo', NULL, 'Duff', 'Léo'),
+(19, 'dave', 'dave', NULL, 'Lee', 'Dave'),
+(18, 'austin ', 'austin', NULL, 'Evans', 'Austin'),
+(17, 'wallace', 'wallace', NULL, 'Dangelo', 'Wallace'),
+(16, 'marques', 'marques', NULL, 'Brownlee', 'Marques'),
+(21, 'rene', 'rene', NULL, 'Ritchie', 'René'),
+(22, 'drew', 'drew', NULL, 'Gooden', 'Drew'),
+(14, 'jarvis', 'jarvis', '', 'Johnson', 'Jarvis'),
+(13, 'dannygonzalez', 'dannygonzalez', '', 'Gonzalez', 'Danny');
 
 --
 -- Indexes for dumped tables
@@ -147,9 +120,9 @@ ALTER TABLE `message`
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- Indexes for table `utilisateur`
+-- Indexes for table `Utilisateur`
 --
-ALTER TABLE `utilisateur`
+ALTER TABLE `Utilisateur`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -160,13 +133,13 @@ ALTER TABLE `utilisateur`
 -- AUTO_INCREMENT for table `Amitie`
 --
 ALTER TABLE `Amitie`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `Invitation`
 --
 ALTER TABLE `Invitation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `message`
@@ -175,10 +148,10 @@ ALTER TABLE `message`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `utilisateur`
+-- AUTO_INCREMENT for table `Utilisateur`
 --
-ALTER TABLE `utilisateur`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+ALTER TABLE `Utilisateur`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
